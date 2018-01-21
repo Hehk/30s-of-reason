@@ -1,1 +1,4 @@
-Js.log("test");
+Js.log("Hello, BuckleScript and Reason!");
+
+
+
