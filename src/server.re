@@ -1,16 +1,19 @@
 open Express;
 
 let app = express();
+let snippets = Snippet.loadSnippets();
 
-let makeSuccessJson = () => {
+let makeSnippetListJson = () => {
   let json = Js.Dict.empty();
-  Js.Dict.set(json, "hello", Js.Json.string("reason"));
+  Js.Dict.set(json, "snippets", Js.Json.array(
+    Array.map(Snippet.toJson, snippets)
+  ));
   Js.Json.object_(json)
 };
 
 App.useOnPath(app, ~path="/", Middleware.from(
   (_req, res, _next) => {
-    Response.sendJson(res, makeSuccessJson());
+    Response.sendJson(res, makeSnippetListJson());
   }
 ));
 
