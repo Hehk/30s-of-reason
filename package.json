@@ -4,7 +4,7 @@
   "scripts": {
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
-    "start": "node lib/js/src/server.bs.js",
+    "start": "nodemon lib/js/src/server.bs.js",
     "clean": "bsb -clean-world"
   },
   "keywords": [
@@ -13,7 +13,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "^2.1.0"
+    "bs-platform": "^2.1.0",
+    "nodemon": "^1.14.11"
   },
   "dependencies": {
     "bs-express": "^0.0.6"
