@@ -32,15 +32,39 @@ let toJson = snippet => {
   Js.Json.object_(snippetJson);
 };
 
+let createSnippet = (~id, ~rawRe, ~jsOutput, ()) => {
+  let pattern = [%bs.re "/(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"];
+  /* God i hate regex in Reason */
+  let segments = switch (Js.Re.exec(rawRe, pattern)) {
+  | None => [||];
+  | Some(result) => result
+    |> Js.Re.captures
+    |> Array.map(Js.Nullable.to_opt)
+    |> Array.map(segment => switch segment {
+      | None => ""
+      | Some(x) => x
+    })
+  };
+  switch segments {
+  | [| _all, _descHeader, description, _descEnd, _setup, _contentHeader, content, _exampleHeader, example |] => {
+      id,
+      description: String.trim(description),
+      content: String.trim(content),
+      example: String.trim(example),
+      jsOutput
+    }
+  | _ => { id: -1, description: "", content: "", example: "", jsOutput: "" }
+  };
+};
+
 let loadSnippets = () => {
   listSnippetNames()
-  |> Array.map(name => (loadSnippetRawRe(name), loadSnippetJsOutput(name)))
-  |> Array.mapi((i, (rawRe, jsOutput)) => {
-    id: i,
-    content: rawRe,
-    description: "description",
-    example: "example",
-    jsOutput
-  })
+  |> Array.mapi((i, name) => createSnippet(
+    ~id=i,
+    ~rawRe=loadSnippetRawRe(name),
+    ~jsOutput=loadSnippetJsOutput(name),
+    ()))
+  |> Array.to_list
+  |> List.filter(snippet => snippet.id === -1 ? false : true)
 };
 

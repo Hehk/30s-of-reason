@@ -6,7 +6,9 @@ let snippets = Snippet.loadSnippets();
 let makeSnippetListJson = () => {
   let json = Js.Dict.empty();
   Js.Dict.set(json, "snippets", Js.Json.array(
-    Array.map(Snippet.toJson, snippets)
+      snippets
+    |> List.map(Snippet.toJson)
+    |> Array.of_list
   ));
   Js.Json.object_(json)
 };
