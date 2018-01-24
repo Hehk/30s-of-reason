@@ -12,7 +12,9 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "bs-express"
+    "bs-express",
+    "bs-graphql",
+    "bs-apollo-server-express"
   ],
   "namespace": true,
   "refmt": 3

@@ -1,9 +1,22 @@
+/* type t = { */
+/*   id: int, */
+/*   content: string, */
+/*   description: string, */
+/*   example: string, */
+/*   jsOutput: string */
+/* }; */
+
 type t = {
-  id: int,
-  content: string,
-  description: string,
-  example: string,
-  jsOutput: string
+  .
+  "id": int,
+  "content": string,
+  "description": string,
+  "example": string,
+  "jsOutput": string
+};
+
+module Resolve = {
+  
 };
 
 let workingReDir = "./snippets/";
@@ -22,15 +35,15 @@ let loadSnippetJsOutput = name => {
   Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
 };
 
-let toJson = snippet => {
-  let snippetJson = Js.Dict.empty();
-  Js.Dict.set(snippetJson, "id", Js.Json.number(float_of_int(snippet.id)));
-  Js.Dict.set(snippetJson, "content", Js.Json.string(snippet.content));
-  Js.Dict.set(snippetJson, "description", Js.Json.string(snippet.description));
-  Js.Dict.set(snippetJson, "example", Js.Json.string(snippet.example));
-  Js.Dict.set(snippetJson, "jsOutput", Js.Json.string(snippet.jsOutput));
-  Js.Json.object_(snippetJson);
-};
+/* let toJson = snippet => { */
+/*   let snippetJson = Js.Dict.empty(); */
+/*   Js.Dict.set(snippetJson, "id", Js.Json.number(float_of_int(snippet.id))); */
+/*   Js.Dict.set(snippetJson, "content", Js.Json.string(snippet.content)); */
+/*   Js.Dict.set(snippetJson, "description", Js.Json.string(snippet.description)); */
+/*   Js.Dict.set(snippetJson, "example", Js.Json.string(snippet.example)); */
+/*   Js.Dict.set(snippetJson, "jsOutput", Js.Json.string(snippet.jsOutput)); */
+/*   Js.Json.object_(snippetJson); */
+/* }; */
 
 let createSnippet = (~id, ~rawRe, ~jsOutput, ()) => {
   let pattern = [%bs.re "/(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"];
@@ -47,13 +60,13 @@ let createSnippet = (~id, ~rawRe, ~jsOutput, ()) => {
   };
   switch segments {
   | [| _all, _descHeader, description, _descEnd, _setup, _contentHeader, content, _exampleHeader, example |] => {
-      id,
-      description: String.trim(description),
-      content: String.trim(content),
-      example: String.trim(example),
-      jsOutput
+      "id": id,
+      "description": String.trim(description),
+      "content": String.trim(content),
+      "example": String.trim(example),
+      "jsOutput": jsOutput
     }
-  | _ => { id: -1, description: "", content: "", example: "", jsOutput: "" }
+  | _ => { "id": -1, "description": "", "content": "", "example": "", "jsOutput": "" }
   };
 };
 
@@ -65,6 +78,7 @@ let loadSnippets = () => {
     ~jsOutput=loadSnippetJsOutput(name),
     ()))
   |> Array.to_list
-  |> List.filter(snippet => snippet.id === -1 ? false : true)
+  |> List.filter(snippet => snippet##id === -1 ? false : true)
+  |> Array.of_list
 };
 
