@@ -1,23 +1,22 @@
-/* type t = { */
-/*   id: int, */
-/*   content: string, */
-/*   description: string, */
-/*   example: string, */
-/*   jsOutput: string */
-/* }; */
-
 type t = {
   .
   "id": int,
   "content": string,
   "description": string,
   "example": string,
-  "jsOutput": string
+  "jsOutput": string,
+  "objectID": string
 };
 
-module Resolve = {
-  
-};
+
+let graphQLType = "
+  type Snippet {
+    id: ID! @unique
+    content: String!
+    description: String!
+    example: String!
+    jsOutput: String!
+  }";
 
 let workingReDir = "./snippets/";
 let workingJsDir = "./lib/js/snippets/";
@@ -35,17 +34,7 @@ let loadSnippetJsOutput = name => {
   Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
 };
 
-/* let toJson = snippet => { */
-/*   let snippetJson = Js.Dict.empty(); */
-/*   Js.Dict.set(snippetJson, "id", Js.Json.number(float_of_int(snippet.id))); */
-/*   Js.Dict.set(snippetJson, "content", Js.Json.string(snippet.content)); */
-/*   Js.Dict.set(snippetJson, "description", Js.Json.string(snippet.description)); */
-/*   Js.Dict.set(snippetJson, "example", Js.Json.string(snippet.example)); */
-/*   Js.Dict.set(snippetJson, "jsOutput", Js.Json.string(snippet.jsOutput)); */
-/*   Js.Json.object_(snippetJson); */
-/* }; */
-
-let createSnippet = (~id, ~rawRe, ~jsOutput, ()) => {
+let createSnippet = (~id, ~rawRe, ~jsOutput, ~name, ()) => {
   let pattern = [%bs.re "/(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"];
   /* God i hate regex in Reason */
   let segments = switch (Js.Re.exec(rawRe, pattern)) {
@@ -64,9 +53,10 @@ let createSnippet = (~id, ~rawRe, ~jsOutput, ()) => {
       "description": String.trim(description),
       "content": String.trim(content),
       "example": String.trim(example),
-      "jsOutput": jsOutput
+      "jsOutput": jsOutput,
+      "objectID": name
     }
-  | _ => { "id": -1, "description": "", "content": "", "example": "", "jsOutput": "" }
+  | _ => { "id": -1, "description": "", "content": "", "example": "", "jsOutput": "", "objectID": name }
   };
 };
 
@@ -76,9 +66,52 @@ let loadSnippets = () => {
     ~id=i,
     ~rawRe=loadSnippetRawRe(name),
     ~jsOutput=loadSnippetJsOutput(name),
+    ~name=name,
     ()))
   |> Array.to_list
   |> List.filter(snippet => snippet##id === -1 ? false : true)
   |> Array.of_list
 };
 
+module Store {
+  let algoliaClient = Algolia.make(
+    ~applicationId=Config.env.algoliaApplicationId,
+    ~apiKey=Config.env.algoliaAPIKey,
+    ()
+  );
+  let algoliaIndex = Algolia.Index.make("30s-snippets", algoliaClient); 
+  let local = loadSnippets();
+
+  Algolia.Index.addObjects(
+    local,
+    algoliaIndex
+  );
+  
+  let getByQuery = (query) => {
+    let res = Algolia.Index.search({ "query": query }, algoliaIndex);
+    res
+    |> Js.Promise.then_((x: {. "hits": array(t)}) => Js.Promise.resolve(x##hits));
+  }
+};
+
+module Handler {
+  type graphQLContext;
+
+  type resolvers('root) = {
+    queries: {.
+      "allSnippets": (Js.Nullable.t('root), {. "query": Js.Nullable.t(string)}, Js.t(graphQLContext)) => 
+        Js.Promise.t(array(t))
+    },
+  };
+
+  let make = () => {
+    queries: {
+      "allSnippets": (_root, input, _context) => {
+        switch (Js.Nullable.to_opt(input##query)) {
+        | Some(query) => Store.getByQuery(query)
+        | None => Js.Promise.resolve([||])
+        }
+      }
+    }
+  }
+};

@@ -17,11 +17,14 @@
     "nodemon": "^1.14.11"
   },
   "dependencies": {
+    "algoliasearch": "^3.24.9",
     "body-parser": "^1.18.2",
     "bs-apollo-server-express": "^0.3.1",
     "bs-express": "^0.0.6",
     "bs-graphql": "^0.3.1",
+    "bs-graphql-tools": "^0.3.1",
     "express": "^4.16.2",
-    "graphql": "^0.12.3"
+    "graphql": "^0.12.3",
+    "graphql-tools": "^2.19.0"
   }
 }

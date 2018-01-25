@@ -15,23 +15,4 @@ let graphqlMiddleware = Router.GraphQL.make();
 Express.App.use(app, bodyParserJson());
 Express.App.useOnPath(app, graphqlMiddleware, ~path="/graphql");
 Express.App.useOnPath(app, graphiqlMiddleware, ~path="/graphiql");
-Express.App.listen(app, ~onListen=onListen(3000), ());
-
-/* let makeSnippetListJson = () => { */
-/*   let json = Js.Dict.empty(); */
-/*   Js.Dict.set(json, "snippets", Js.Json.array( */
-/*       snippets */
-/*     |> List.map(Snippet.toJson) */
-/*     |> Array.of_list */
-/*   )); */
-/*   Js.Json.object_(json) */
-/* }; */
-
-/* App.useOnPath(app, ~path="/", Middleware.from( */
-/*   (_req, res, _next) => { */
-/*     Response.sendJson(res, makeSnippetListJson()); */
-/*   } */
-/* )); */
-
-
-/* App.listen(app, ~onListen=onListen(3000), ()); */
+Express.App.listen(app, ~onListen=onListen(Config.env.port), ());
