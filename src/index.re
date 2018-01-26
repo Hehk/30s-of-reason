@@ -4,7 +4,10 @@ let app = Express.App.make();
 
 let graphqlMiddleware = {
   let types = Snippet.graphQLType;
-  let query = "type Query { allSnippets(query: String): [Snippet]!}";
+  let query = "type Query {
+    allSnippets(query: String): [Snippet]!
+    snippet(id: Int!): Snippet!
+  }";
   let snippet = Snippet.Handler.make();
   let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
   GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})

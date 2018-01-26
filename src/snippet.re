@@ -65,6 +65,7 @@ module Store = {
     let res = Algolia.Index.search({"query": query}, algoliaIndex);
     res |> Js.Promise.then_((x: {.. "hits": array(t)}) => Js.Promise.resolve(x##hits))
   };
+  let getById = (id) => local |> Array.to_list |> List.filter(snippet => snippet##id == id) |> List.hd;
 };
 
 module Handler = {
@@ -73,7 +74,8 @@ module Handler = {
     queries: {
       .
       "allSnippets":
-        (Js.Nullable.t('root), {. "query": Js.Nullable.t(string)}, Js.t(graphQLContext)) => Js.Promise.t(array(t))
+        (Js.Nullable.t('root), {. "query": Js.Nullable.t(string)}, Js.t(graphQLContext)) => Js.Promise.t(array(t)),
+      "snippet": (Js.Nullable.t('root), {. "id": int}, Js.t(graphQLContext)) => t
     }
   };
   let make = () => {
@@ -82,7 +84,8 @@ module Handler = {
         switch (Js.Nullable.to_opt(input##query)) {
         | Some(query) => Store.getByQuery(query)
         | None => Js.Promise.resolve([||])
-        }
+        },
+      "snippet": (_root, input, _context) => Store.getById(input##id)
     }
   };
 };
