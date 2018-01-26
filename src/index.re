@@ -2,6 +2,15 @@ let app = Express.App.make();
 
 [@bs.module "body-parser"] external bodyParserJson : unit => Express.Middleware.t = "json";
 
+let graphqlMiddleware = {
+  let types = Snippet.graphQLType;
+  let query = "type Query { allSnippets(query: String): [Snippet]!}";
+  let snippet = Snippet.Handler.make();
+  let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
+  GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})
+  |> ApolloServerExpress.createGraphQLExpressMiddleware
+};
+
 let graphiqlMiddleware = ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
 
 let onListen = (port, e) =>
@@ -18,8 +27,6 @@ let onListen = (port, e) =>
       ++ "/graphiql\n"
     )
   };
-
-let graphqlMiddleware = Router.GraphQL.make();
 
 Express.App.use(app, bodyParserJson());
 
