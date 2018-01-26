@@ -4,7 +4,7 @@
   "scripts": {
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
-    "start": "nodemon lib/js/src/server.bs.js",
+    "start": "nodemon lib/js/src/index.bs.js",
     "clean": "bsb -clean-world"
   },
   "keywords": [

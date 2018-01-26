@@ -9,7 +9,14 @@ let onListen = (port, e) =>
   | exception (Js.Exn.Error(e)) =>
     Js.log(e);
     Node.Process.exit(1)
-  | _ => Js.log("Listening at localhost:" ++ string_of_int(port))
+  | _ =>
+    Js.log(
+      "\n GraphQL  => localhost:"
+      ++ string_of_int(port)
+      ++ "/graphql\n GraphIQL => localhost:"
+      ++ string_of_int(port)
+      ++ "/graphiql\n"
+    )
   };
 
 let graphqlMiddleware = Router.GraphQL.make();
