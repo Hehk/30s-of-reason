@@ -55,16 +55,15 @@ module Scraper = {
     |> Array.of_list;
 };
 
-
 module Store = {
   let algoliaClient =
-    Algolia.make(~applicationId=Config.env.algoliaApplicationId, ~apiKey=Config.env.algoliaAPIKey, ());
+    Algolia.Client.make(~applicationId=Config.env.algoliaApplicationId, ~apiKey=Config.env.algoliaAPIKey, ());
   let algoliaIndex = Algolia.Index.make("30s-snippets", algoliaClient);
   let local = Scraper.loadSnippets();
   Algolia.Index.addObjects(local, algoliaIndex);
   let getByQuery = (query) => {
     let res = Algolia.Index.search({"query": query}, algoliaIndex);
-    res |> Js.Promise.then_((x: {. "hits": array(t)}) => Js.Promise.resolve(x##hits))
+    res |> Js.Promise.then_((x: {.. "hits": array(t)}) => Js.Promise.resolve(x##hits))
   };
 };
 
