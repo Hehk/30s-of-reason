@@ -12,6 +12,7 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
+    "bs-algolia",
     "bs-express",
     "bs-graphql",
     "bs-graphql-tools",

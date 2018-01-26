@@ -19,6 +19,7 @@
   "dependencies": {
     "algoliasearch": "^3.24.9",
     "body-parser": "^1.18.2",
+    "bs-algolia": "^0.0.1",
     "bs-apollo-server-express": "^0.3.1",
     "bs-express": "^0.0.6",
     "bs-graphql": "^0.3.1",

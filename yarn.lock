@@ -277,6 +277,12 @@ braces@^2.3.0:
     split-string "^3.0.2"
     to-regex "^3.0.1"
 
+bs-algolia@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/bs-algolia/-/bs-algolia-0.0.1.tgz#4e29bd0a5802098e332abe3d2bfdf1aa478f0f8b"
+  dependencies:
+    algoliasearch "^3.24.9"
+
 bs-apollo-server-express@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/bs-apollo-server-express/-/bs-apollo-server-express-0.3.1.tgz#85d5b7ef7355a0a0c73144d98610882172a83a34"
