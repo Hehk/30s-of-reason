@@ -70,8 +70,9 @@ module Store = {
   let local = Scraper.loadSnippets();
   Algolia.Index.addObjects(local, algoliaIndex);
   let getByQuery = (query) => {
-    let res = Algolia.Index.search({"query": query}, algoliaIndex);
-    res |> Js.Promise.then_((x: {.. "hits": array(t)}) => Js.Promise.resolve(x##hits))
+    algoliaIndex
+    |> Algolia.Index.search({"query": query})
+    |> Js.Promise.then_((x) => Js.Promise.resolve(x##hits))
   };
   let getById = (id) => local |> Array.to_list |> List.filter(snippet => snippet##id == id) |> List.hd;
 };
