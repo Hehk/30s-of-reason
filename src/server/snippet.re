@@ -3,7 +3,15 @@ type t = {
   "id": int, "content": string, "description": string, "example": string, "jsOutput": string, "objectID": string
 };
 
-let graphQLType = "\n  type Snippet {\n    id: ID! @unique\n    content: String!\n    description: String!\n    example: String!\n    jsOutput: String!\n  }";
+let graphQLType = {|
+  type Snippet {
+    id:          ID! @unique
+    content:     String!
+    description: String!
+    example:     String!
+    jsOutput:    String!
+  }
+|};
 
 module Scraper = {
   let workingReDir = "./snippets/";

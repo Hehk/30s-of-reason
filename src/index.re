@@ -1,23 +1,22 @@
 let app = Express.App.make();
 
-[@bs.module "body-parser"]
-external bodyParserJson : unit => Express.Middleware.t =
-  "json";
+[@bs.module "body-parser"] external bodyParserJson : unit => Express.Middleware.t = "json";
 
 let graphqlMiddleware = {
   let types = Snippet.graphQLType;
-  let query = "type Query {\n    allSnippets(query: String): [Snippet]!\n    snippet(id: Int!): Snippet!\n  }";
+  let query = {|
+    type Query {
+      allSnippets(query: String): [Snippet]!
+      snippet(id: Int!): Snippet!
+    }
+  |};
   let snippet = Snippet.Handler.make();
   let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
-  GraphQLTools.makeExecutableSchema({
-    "typeDefs": types ++ query,
-    "resolvers": resolvers
-  })
+  GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})
   |> ApolloServerExpress.createGraphQLExpressMiddleware
 };
 
-let graphiqlMiddleware =
-  ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
+let graphiqlMiddleware = ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
 
 Express.App.use(app, bodyParserJson());
 
@@ -30,7 +29,7 @@ Express.App.useOnPath(
   Express.Middleware.from(
     (_req, res, _next) => {
       let body = ReactDOMServerRe.renderToString(<App />);
-      Express.Response.sendString(res, Template.make(~body, ()))
+      Express.Response.sendString(res, Template.make(~body, ~title="30s of Reason", ()))
     }
   ),
   ~path="/"
