@@ -1,27 +1,40 @@
-open Express;
+let app = Express.App.make();
 
-let app = App.make();
-
-[@bs.module "body-parser"] external bodyParserJson : unit => Express.Middleware.t = "json";
+[@bs.module "body-parser"]
+external bodyParserJson : unit => Express.Middleware.t =
+  "json";
 
 let graphqlMiddleware = {
   let types = Snippet.graphQLType;
   let query = "type Query {\n    allSnippets(query: String): [Snippet]!\n    snippet(id: Int!): Snippet!\n  }";
   let snippet = Snippet.Handler.make();
   let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
-  GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})
+  GraphQLTools.makeExecutableSchema({
+    "typeDefs": types ++ query,
+    "resolvers": resolvers
+  })
   |> ApolloServerExpress.createGraphQLExpressMiddleware
 };
 
-let graphiqlMiddleware = ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
+let graphiqlMiddleware =
+  ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
 
-App.use(app, bodyParserJson());
+Express.App.use(app, bodyParserJson());
 
-App.useOnPath(app, graphqlMiddleware, ~path="/graphql");
+Express.App.useOnPath(app, graphqlMiddleware, ~path="/graphql");
 
-App.useOnPath(app, graphiqlMiddleware, ~path="/graphiql");
+Express.App.useOnPath(app, graphiqlMiddleware, ~path="/graphiql");
 
-App.useOnPath(app, Middleware.from((_req, res, _next) => Response.sendString(res, "Testing123")), ~path="/");
+Express.App.useOnPath(
+  app,
+  Express.Middleware.from(
+    (_req, res, _next) => {
+      let body = ReactDOMServerRe.renderToString(<App />);
+      Express.Response.sendString(res, Template.make(~body, ()))
+    }
+  ),
+  ~path="/"
+);
 
 let onListen = (e) => {
   let port = string_of_int(Config.env.port);
@@ -38,4 +51,4 @@ let onListen = (e) => {
   }
 };
 
-App.listen(app, ~onListen, ());
+Express.App.listen(app, ~onListen, ());

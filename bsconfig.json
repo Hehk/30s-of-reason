@@ -4,7 +4,10 @@
   "name": "server",
   "version": "0.1.0",
   "sources": [
-    "src",
+    {
+      "dir": "src",
+      "subdirs": true
+    },
     "snippets"
   ],
   "package-specs": {
@@ -16,8 +19,12 @@
     "bs-express",
     "bs-graphql",
     "bs-graphql-tools",
-    "bs-apollo-server-express"
+    "bs-apollo-server-express",
+    "reason-react"
   ],
+  "reason": {
+    "react-jsx": 2
+  },
   "namespace": true,
   "refmt": 3
 }

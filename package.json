@@ -26,6 +26,7 @@
     "bs-graphql-tools": "^0.3.1",
     "express": "^4.16.2",
     "graphql": "^0.12.3",
-    "graphql-tools": "^2.19.0"
+    "graphql-tools": "^2.19.0",
+    "reason-react": "^0.3.1"
   }
 }
