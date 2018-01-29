@@ -1,10 +1,10 @@
 
-let make = (~body="testing", ~title="", ()) => {j|
+let make = (~body, ~styles, ~title, ()) => {j|
   <!DOCTYPE html>
     <html>
       <head>
         <title>$title</title>
-        <link rel="stylesheet" href="/assets/index.css" />
+        $styles
       </head>
       
       <body>
@@ -12,3 +12,10 @@ let make = (~body="testing", ~title="", ()) => {j|
       </body>
     </html> 
 |j};
+
+let generateStyles = (~html="", ()) => {
+  let css = Nice.extract(html).css
+  |> List.fold_left((a, b) => a ++ " " ++ b, "");
+
+  {j|<style type="text/css">$css</style>|j};
+};

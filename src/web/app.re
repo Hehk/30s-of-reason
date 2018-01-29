@@ -2,5 +2,5 @@ let component = ReasonReact.statelessComponent("App");
 
 let make = (_children) => {
   ...component,
-  render: (_self) => <div> (ReasonReact.stringToElement("Hello World")) </div>
+  render: (_self) => <Background> (ReasonReact.stringToElement("Hello World")) </Background>
 };

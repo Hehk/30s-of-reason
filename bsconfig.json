@@ -20,7 +20,8 @@
     "bs-graphql",
     "bs-graphql-tools",
     "bs-apollo-server-express",
-    "reason-react"
+    "reason-react",
+    "bs-nice"
   ],
   "reason": {
     "react-jsx": 2

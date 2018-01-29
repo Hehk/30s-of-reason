@@ -29,7 +29,8 @@ Express.App.useOnPath(
   Express.Middleware.from(
     (_req, res, _next) => {
       let body = ReactDOMServerRe.renderToString(<App />);
-      Express.Response.sendString(res, Template.make(~body, ~title="30s of Reason", ()))
+      let styles = Template.generateStyles(~html=body, ());
+      Express.Response.sendString(res, Template.make(~body, ~styles, ~title="30s of Reason", ()))
     }
   ),
   ~path="/"

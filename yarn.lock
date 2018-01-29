@@ -318,6 +318,10 @@ bs-graphql@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/bs-graphql/-/bs-graphql-0.3.1.tgz#799a56554dafa362b18beba8f30ba94eb450d8f0"
 
+bs-nice@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/bs-nice/-/bs-nice-0.1.5.tgz#bc51044c286e772ae2314be796cec0cc177d0d27"
+
 bs-platform@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.1.0.tgz#63560ff8f7142c9c0631559df1c35590b9f6d8b2"
