@@ -3,7 +3,7 @@ open Nice;
 let component = ReasonReact.statelessComponent("");
 
 let outerCls = css([
-  BackgroundColor(RGBa(219, 77, 63, 1.)),
+  Raw("min-height", "100vh")
 ]);
 
 let innerCls = css([
@@ -14,6 +14,6 @@ let innerCls = css([
 let make = (children) => {
   ...component,
     render: (_self) => <div className=outerCls> 
-      <div className=innerCls> (ReasonReact.arrayToElement(children)) </div>
+      <div className=innerCls> (ReasonReact.createDomElement("div", ~props=Js.Obj.empty(), children))</div>
     </div>
 };
