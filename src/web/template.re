@@ -1,4 +1,4 @@
-let globalStyles = "body { margin: 0; padding: 0; background-color: rgb(219, 77, 63); }";
+let globalStyles = "body { margin: 0; padding: 0;}";
 
 let make = (~body, ~styles, ~title, ()) => {j|
   <!DOCTYPE html>
