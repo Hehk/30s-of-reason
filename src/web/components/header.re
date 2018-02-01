@@ -11,7 +11,9 @@ module Wrapper = (
       )
 );
 
-module Logo = (val NiceComponents.div(~debugName="HeaderLogo", [Color(White), Raw("display", "inline"), FontWeight(Bold)]));
+module Logo = (
+  val NiceComponents.div(~debugName="HeaderLogo", [Color(White), Raw("display", "inline"), FontWeight(Bold)])
+);
 
 module Nav = (
   val NiceComponents.ol(
@@ -31,7 +33,7 @@ let make = (_children) => {
   render: (_self) =>
     <Wrapper>
       <PageFrame>
-        <Logo> (str_to_ele("30s of Reason")) </Logo>
+        <Logo> <NavLink props={"href": "/"}> (str_to_ele("30s of Reason")) </NavLink> </Logo>
         <Nav>
           <NavItem>
             <NavLink props={"href": "https://github.com/hehk/30s-of-reason"}> (str_to_ele("Github")) </NavLink>
