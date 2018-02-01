@@ -1,19 +1,17 @@
 open Nice;
 
-let component = ReasonReact.statelessComponent("");
+let component = ReasonReact.statelessComponent("Background");
 
-let outerCls = css([
-  Raw("min-height", "100vh")
-]);
+module Wrapper = (val NiceComponents.div(~name="Wrapper", [Raw("min-height", "100vh")]));
 
-let innerCls = css([
-  MaxWidth(Px(960)),
-  Raw("margin", "auto")
-]);
+module Page = (
+  val NiceComponents.div(~name="Page", [MaxWidth(Px(960)), Raw("margin", "auto")])
+);
 
 let make = (children) => {
   ...component,
-    render: (_self) => <div className=outerCls> 
-      <div className=innerCls> (ReasonReact.createDomElement("div", ~props=Js.Obj.empty(), children))</div>
-    </div>
+  render: (_self) =>
+    <Wrapper>
+      <Page> (ReasonReact.createDomElement("div", ~props=Js.Obj.empty(), children)) </Page>
+    </Wrapper>
 };
