@@ -9,8 +9,10 @@ let make = (~body, ~styles, ~title, ()) => {j|
       </head>
 
       <body>
-        <div id="root">$body</div>
+        <div id="react-root">$body</div>
       </body>
+
+      <script src="assets/bundle.js"></script>
     </html>
 |j};
 

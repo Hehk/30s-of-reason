@@ -24,6 +24,11 @@ Express.App.useOnPath(app, graphqlMiddleware, ~path="/graphql");
 
 Express.App.useOnPath(app, graphiqlMiddleware, ~path="/graphiql");
 
+Express.App.useOnPath(app, ~path="/assets", {
+  let options = Express.Static.defaultOptions();
+  Express.Static.make("build/assets/", options) |> Express.Static.asMiddleware;
+});
+
 Express.App.useOnPath(
   app,
   Express.Middleware.from(

@@ -5,6 +5,7 @@
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
     "start": "nodemon lib/js/src/index.bs.js",
+    "webpack": "webpack --watch",
     "clean": "bsb -clean-world"
   },
   "keywords": [
@@ -28,6 +29,8 @@
     "express": "^4.16.2",
     "graphql": "^0.12.3",
     "graphql-tools": "^2.19.0",
-    "reason-react": "^0.3.1"
+    "reason-react": "^0.3.1",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
   }
 }
