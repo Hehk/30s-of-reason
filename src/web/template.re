@@ -5,6 +5,7 @@ let make = (~body, ~styles, ~title, ()) => {j|
     <html>
       <head>
         <title>$title</title>
+        <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet">
         $styles
       </head>
 
