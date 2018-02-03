@@ -21,11 +21,15 @@
     "bs-graphql-tools",
     "bs-apollo-server-express",
     "reason-react",
+    "reason-apollo",
     "bs-nice"
   ],
   "reason": {
     "react-jsx": 2
   },
+  "ppx-flags": [
+    "graphql_ppx/ppx"
+  ],
   "namespace": true,
   "refmt": 3
 }
