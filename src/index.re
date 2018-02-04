@@ -1,6 +1,7 @@
 let app = Express.App.make();
 
-[@bs.module "body-parser"] external bodyParserJson : unit => Express.Middleware.t = "json";
+[@bs.module "body-parser"]
+external bodyParserJson : unit => Express.Middleware.t = "json";
 
 let graphqlMiddleware = {
   let types = Snippet.graphQLType;
@@ -12,11 +13,15 @@ let graphqlMiddleware = {
   |};
   let snippet = Snippet.Handler.make();
   let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
-  GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})
-  |> ApolloServerExpress.createGraphQLExpressMiddleware
+  GraphQLTools.makeExecutableSchema({
+    "typeDefs": types ++ query,
+    "resolvers": resolvers
+  })
+  |> ApolloServerExpress.createGraphQLExpressMiddleware;
 };
 
-let graphiqlMiddleware = ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
+let graphiqlMiddleware =
+  ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
 
 Express.App.use(app, bodyParserJson());
 
@@ -24,24 +29,32 @@ Express.App.useOnPath(app, graphqlMiddleware, ~path="/graphql");
 
 Express.App.useOnPath(app, graphiqlMiddleware, ~path="/graphiql");
 
-Express.App.useOnPath(app, ~path="/assets", {
-  let options = Express.Static.defaultOptions();
-  Express.Static.make("build/assets/", options) |> Express.Static.asMiddleware;
-});
+Express.App.useOnPath(
+  app,
+  ~path="/assets",
+  {
+    let options = Express.Static.defaultOptions();
+    Express.Static.make("build/assets/", options) |> Express.Static.asMiddleware;
+  }
+);
 
 Express.App.useOnPath(
   app,
-  Express.Middleware.from(
-    (_req, res, _next) => {
-      let body = ReactDOMServerRe.renderToString(<App />);
-      let styles = Template.generateStyles(~html=body, ());
-      Express.Response.sendString(res, Template.make(~body, ~styles, ~title="30s of Reason", ()))
-    }
-  ),
+  Express.Middleware.from((_req, res, _next) => {
+    let body =
+      ReactDOMServerRe.renderToString(
+        <Background> <Header /> <SnippetsLoading /> </Background>
+      );
+    let styles = Template.generateStyles(~html=body, ());
+    Express.Response.sendString(
+      res,
+      Template.make(~body, ~styles, ~title="30s of Reason", ())
+    );
+  }),
   ~path="/"
 );
 
-let onListen = (e) => {
+let onListen = e => {
   let port = string_of_int(Config.env.port);
   let message = {j|
   GraphQL  => localhost:$port/graphql
@@ -51,9 +64,9 @@ let onListen = (e) => {
   switch e {
   | exception (Js.Exn.Error(e)) =>
     Js.log(e);
-    Node.Process.exit(1)
+    Node.Process.exit(1);
   | _ => Js.log(message)
-  }
+  };
 };
 
 Express.App.listen(app, ~onListen, ());
