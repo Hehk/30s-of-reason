@@ -1,6 +1,7 @@
 open Utils;
 
-module SnippetQuery = [%graphql {|
+module SnippetQuery = [%graphql
+  {|
   query getAllSnippets($filter: String!) {
     allSnippets(query: $filter) {
       content
@@ -21,8 +22,8 @@ let make = _children => {
       ...(
            (response, _parse) =>
              switch response {
-             | Loading => <div> (str_to_ele("loading")) </div>
-             | Failed(_error) => <div> (str_to_ele("loading")) </div>
+             | Loading => <SnippetsLoading />
+             | Failed(_error) => <div> (str_to_ele("error")) </div>
              | Loaded(result) =>
                Js.log(result);
                <div> (str_to_ele("it works")) </div>;
