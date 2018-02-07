@@ -16,10 +16,11 @@ module Query = Apollo.Client.Query;
 
 let component = ReasonReact.statelessComponent("snippets");
 
-let make = _children => {
+let make = (~filter="", _children) => {
   ...component,
   render: _self => {
-    let snippetQuery = SnippetQuery.make(~filter="", ());
+    Js.log(filter);
+    let snippetQuery = SnippetQuery.make(~filter, ());
     <PageFrame>
       <Query query=snippetQuery>
         ...(

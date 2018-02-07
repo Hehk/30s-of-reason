@@ -1,7 +1,6 @@
 let app = Express.App.make();
 
-[@bs.module "body-parser"]
-external bodyParserJson : unit => Express.Middleware.t = "json";
+[@bs.module "body-parser"] external bodyParserJson : unit => Express.Middleware.t = "json";
 
 let graphqlMiddleware = {
   let types = Snippet.graphQLType;
@@ -13,15 +12,11 @@ let graphqlMiddleware = {
   |};
   let snippet = Snippet.Handler.make();
   let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
-  GraphQLTools.makeExecutableSchema({
-    "typeDefs": types ++ query,
-    "resolvers": resolvers
-  })
+  GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})
   |> ApolloServerExpress.createGraphQLExpressMiddleware;
 };
 
-let graphiqlMiddleware =
-  ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
+let graphiqlMiddleware = ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
 
 Express.App.use(app, bodyParserJson());
 
@@ -43,13 +38,10 @@ Express.App.useOnPath(
   Express.Middleware.from((_req, res, _next) => {
     let body =
       ReactDOMServerRe.renderToString(
-        <Background> <Header /> <PageFrame> <SnippetsLoading /> </PageFrame> </Background>
+        <Background> <Header /> <Search /> <PageFrame> <SnippetsLoading /> </PageFrame> </Background>
       );
     let styles = Template.generateStyles(~html=body, ());
-    Express.Response.sendString(
-      res,
-      Template.make(~body, ~styles, ~title="30s of Reason", ())
-    );
+    Express.Response.sendString(res, Template.make(~body, ~styles, ~title="30s of Reason", ()));
   }),
   ~path="/"
 );

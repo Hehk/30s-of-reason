@@ -71,3 +71,5 @@ let h4 = make(~tag="h4");
 let h5 = make(~tag="h5");
 
 let h6 = make(~tag="h6");
+
+let input = make(~tag="input");
