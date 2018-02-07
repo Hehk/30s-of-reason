@@ -4,7 +4,9 @@ module SnippetQuery = [%graphql
   {|
   query getAllSnippets($filter: String!) {
     allSnippets(query: $filter) {
-      content
+      content,
+      description,
+      id
     }
   }
 |}
@@ -17,18 +19,31 @@ let component = ReasonReact.statelessComponent("snippets");
 let make = _children => {
   ...component,
   render: _self => {
-    let snippetQuery = SnippetQuery.make(~filter="reduce", ());
-    <Query query=snippetQuery>
-      ...(
-           (response, _parse) =>
-             switch response {
-             | Loading => <SnippetsLoading />
-             | Failed(_error) => <div> (str_to_ele("error")) </div>
-             | Loaded(result) =>
-               Js.log(result);
-               <div> (str_to_ele("it works")) </div>;
-             }
-         )
-    </Query>;
+    let snippetQuery = SnippetQuery.make(~filter="", ());
+    <PageFrame>
+      <Query query=snippetQuery>
+        ...(
+             (response, parse) =>
+               switch response {
+               | Loading => <SnippetsLoading />
+               | Failed(_error) => <div> (str_to_ele("error")) </div>
+               | Loaded(result) =>
+                 parse(result)##allSnippets
+                 |> Array.map(snippet =>
+                      switch snippet {
+                      | None => <div> (str_to_ele("failed")) </div>
+                      | Some(x) =>
+                        <Card key=x##id>
+                          <H3> (str_to_ele("List Map")) </H3>
+                          <P> (str_to_ele(x##description)) </P>
+                          <Code> (str_to_ele(x##content)) </Code>
+                        </Card>
+                      }
+                    )
+                 |> ReasonReact.arrayToElement
+               }
+           )
+      </Query>
+    </PageFrame>;
   }
 };

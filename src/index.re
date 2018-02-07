@@ -43,7 +43,7 @@ Express.App.useOnPath(
   Express.Middleware.from((_req, res, _next) => {
     let body =
       ReactDOMServerRe.renderToString(
-        <Background> <Header /> <SnippetsLoading /> </Background>
+        <Background> <Header /> <PageFrame> <SnippetsLoading /> </PageFrame> </Background>
       );
     let styles = Template.generateStyles(~html=body, ());
     Express.Response.sendString(
