@@ -1,11 +1,18 @@
 type t = {
   .
-  "id": int, "content": string, "description": string, "example": string, "jsOutput": string, "objectID": string
+  "id": int,
+  "title": string,
+  "content": string,
+  "description": string,
+  "example": string,
+  "jsOutput": string,
+  "objectID": string
 };
 
 let graphQLType = {|
   type Snippet {
     id:          ID! @unique
+    title:       String!
     content:     String!
     description: String!
     example:     String!
@@ -17,12 +24,12 @@ module Scraper = {
   let workingReDir = "./snippets/";
   let workingJsDir = "./lib/js/snippets/";
   let listSnippetNames = () =>
-    Node.Fs.readdirSync(workingReDir) |> Array.map((name) => String.sub(name, 0, String.length(name) - 3));
-  let loadSnippetRawRe = (name) => Node.Fs.readFileAsUtf8Sync(workingReDir ++ name ++ ".re");
-  let loadSnippetJsOutput = (name) => Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
+    Node.Fs.readdirSync(workingReDir) |> Array.map(name => String.sub(name, 0, String.length(name) - 3));
+  let loadSnippetRawRe = name => Node.Fs.readFileAsUtf8Sync(workingReDir ++ name ++ ".re");
+  let loadSnippetJsOutput = name => Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
   let createSnippet = (~id, ~rawRe, ~jsOutput, ~name, ()) => {
     let pattern = [%bs.re
-      "/(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"
+      "/(\\/\\* @title )([\\s\\S]*)(\\*\\/[\\s\\S]*)(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"
     ];
     /* God i hate regex in Reason */
     let segments =
@@ -32,34 +39,47 @@ module Scraper = {
         result
         |> Js.Re.captures
         |> Array.map(Js.Nullable.to_opt)
-        |> Array.map(
-             (segment) =>
-               switch segment {
-               | None => ""
-               | Some(x) => x
-               }
+        |> Array.map(segment =>
+             switch segment {
+             | None => ""
+             | Some(x) => x
+             }
            )
       };
+    Js.log(segments);
     switch segments {
-    | [|_all, _descHeader, description, _descEnd, _setup, _contentHeader, content, _exampleHeader, example|] => {
+    | [|
+        _all,
+        _titleHeader,
+        title,
+        _titleEnd,
+        _descHeader,
+        description,
+        _descEnd,
+        _setup,
+        _contentHeader,
+        content,
+        _exampleHeader,
+        example
+      |] => {
         "id": id,
+        "title": String.trim(title),
         "description": String.trim(description),
         "content": String.trim(content),
         "example": String.trim(example),
         "jsOutput": jsOutput,
         "objectID": name
       }
-    | _ => {"id": (-1), "description": "", "content": "", "example": "", "jsOutput": "", "objectID": name}
-    }
+    | _ => {"id": (-1), "description": "", "title": "", "content": "", "example": "", "jsOutput": "", "objectID": name}
+    };
   };
   let loadSnippets = () =>
     listSnippetNames()
-    |> Array.mapi(
-         (i, name) =>
-           createSnippet(~id=i, ~rawRe=loadSnippetRawRe(name), ~jsOutput=loadSnippetJsOutput(name), ~name, ())
+    |> Array.mapi((i, name) =>
+         createSnippet(~id=i, ~rawRe=loadSnippetRawRe(name), ~jsOutput=loadSnippetJsOutput(name), ~name, ())
        )
     |> Array.to_list
-    |> List.filter((snippet) => snippet##id === (-1) ? false : true)
+    |> List.filter(snippet => snippet##id === (-1) ? false : true)
     |> Array.of_list;
 };
 
@@ -69,12 +89,9 @@ module Store = {
   let algoliaIndex = Algolia.Index.make("30s-snippets", algoliaClient);
   let local = Scraper.loadSnippets();
   Algolia.Index.addObjects(local, algoliaIndex);
-  let getByQuery = (query) => {
-    algoliaIndex
-    |> Algolia.Index.search({"query": query})
-    |> Js.Promise.then_((x) => Js.Promise.resolve(x##hits))
-  };
-  let getById = (id) => local |> Array.to_list |> List.filter(snippet => snippet##id == id) |> List.hd;
+  let getByQuery = query =>
+    algoliaIndex |> Algolia.Index.search({"query": query}) |> Js.Promise.then_(x => Js.Promise.resolve(x##hits));
+  let getById = id => local |> Array.to_list |> List.filter(snippet => snippet##id == id) |> List.hd;
 };
 
 module Handler = {
