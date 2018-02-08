@@ -18,11 +18,13 @@ let make = (~id, _children) => {
     let query = JsSnippetQuery.make(~id, ());
     <Query query>
       ...(
-           (response, _query) =>
+           (response, parse) =>
              switch response {
              | Loading => str_to_ele("loading")
              | Failed(_error) => str_to_ele("error")
-             | Loaded(_result) => str_to_ele("done")
+             | Loaded(result) =>
+               let snippet = parse(result)##snippet;
+               <Code> (str_to_ele(snippet##jsOutput)) </Code>;
              }
          )
     </Query>;

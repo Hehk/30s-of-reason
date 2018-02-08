@@ -38,6 +38,7 @@ let make = (~filter="", _children) => {
                           <H3> (str_to_ele(x##title)) </H3>
                           <P> (str_to_ele(x##description)) </P>
                           <Code> (str_to_ele(x##content)) </Code>
+                          <JsSnippet id=x##id />
                         </Card>
                       }
                     )

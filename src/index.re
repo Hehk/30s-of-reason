@@ -7,7 +7,7 @@ let graphqlMiddleware = {
   let query = {|
     type Query {
       allSnippets(query: String): [Snippet]!
-      snippet(id: Int!): Snippet!
+      snippet(id: ID!): Snippet!
     }
   |};
   let snippet = Snippet.Handler.make();

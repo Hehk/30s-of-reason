@@ -1,6 +1,6 @@
 type t = {
   .
-  "id": int,
+  "id": string,
   "title": string,
   "content": string,
   "description": string,
@@ -24,9 +24,12 @@ module Scraper = {
   let workingReDir = "./snippets/";
   let workingJsDir = "./lib/js/snippets/";
   let listSnippetNames = () =>
-    Node.Fs.readdirSync(workingReDir) |> Array.map(name => String.sub(name, 0, String.length(name) - 3));
-  let loadSnippetRawRe = name => Node.Fs.readFileAsUtf8Sync(workingReDir ++ name ++ ".re");
-  let loadSnippetJsOutput = name => Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
+    Node.Fs.readdirSync(workingReDir)
+    |> Array.map(name => String.sub(name, 0, String.length(name) - 3));
+  let loadSnippetRawRe = name =>
+    Node.Fs.readFileAsUtf8Sync(workingReDir ++ name ++ ".re");
+  let loadSnippetJsOutput = name =>
+    Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
   let createSnippet = (~id, ~rawRe, ~jsOutput, ~name, ()) => {
     let pattern = [%bs.re
       "/(\\/\\* @title )([\\s\\S]*)(\\*\\/[\\s\\S]*)(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"
@@ -69,28 +72,51 @@ module Scraper = {
         "jsOutput": jsOutput,
         "objectID": name
       }
-    | _ => {"id": (-1), "description": "", "title": "", "content": "", "example": "", "jsOutput": "", "objectID": name}
+    | _ => {
+        "id": "",
+        "description": "",
+        "title": "",
+        "content": "",
+        "example": "",
+        "jsOutput": "",
+        "objectID": name
+      }
     };
   };
   let loadSnippets = () =>
     listSnippetNames()
     |> Array.mapi((i, name) =>
-         createSnippet(~id=i, ~rawRe=loadSnippetRawRe(name), ~jsOutput=loadSnippetJsOutput(name), ~name, ())
+         createSnippet(
+           ~id={j|$(i)-$(name)|j},
+           ~rawRe=loadSnippetRawRe(name),
+           ~jsOutput=loadSnippetJsOutput(name),
+           ~name,
+           ()
+         )
        )
     |> Array.to_list
-    |> List.filter(snippet => snippet##id === (-1) ? false : true)
+    |> List.filter(snippet => snippet##id === "" ? false : true)
     |> Array.of_list;
 };
 
 module Store = {
   let algoliaClient =
-    Algolia.Client.make(~applicationId=Config.env.algoliaApplicationId, ~apiKey=Config.env.algoliaAPIKey, ());
+    Algolia.Client.make(
+      ~applicationId=Config.env.algoliaApplicationId,
+      ~apiKey=Config.env.algoliaAPIKey,
+      ()
+    );
   let algoliaIndex = Algolia.Index.make("30s-snippets", algoliaClient);
   let local = Scraper.loadSnippets();
   Algolia.Index.addObjects(local, algoliaIndex);
   let getByQuery = query =>
-    algoliaIndex |> Algolia.Index.search({"query": query}) |> Js.Promise.then_(x => Js.Promise.resolve(x##hits));
-  let getById = id => local |> Array.to_list |> List.filter(snippet => snippet##id == id) |> List.hd;
+    algoliaIndex
+    |> Algolia.Index.search({"query": query})
+    |> Js.Promise.then_(x => Js.Promise.resolve(x##hits));
+  let getById = id => {
+    Js.log(id);
+    local |> Array.to_list |> List.filter(snippet => snippet##id == id) |> List.hd;
+  };
 };
 
 module Handler = {
@@ -99,8 +125,13 @@ module Handler = {
     queries: {
       .
       "allSnippets":
-        (Js.Nullable.t('root), {. "query": Js.Nullable.t(string)}, Js.t(graphQLContext)) => Js.Promise.t(array(t)),
-      "snippet": (Js.Nullable.t('root), {. "id": int}, Js.t(graphQLContext)) => t
+        (
+          Js.Nullable.t('root),
+          {. "query": Js.Nullable.t(string)},
+          Js.t(graphQLContext)
+        ) =>
+        Js.Promise.t(array(t)),
+      "snippet": (Js.Nullable.t('root), {. "id": string}, Js.t(graphQLContext)) => t
     }
   };
   let make = () => {
