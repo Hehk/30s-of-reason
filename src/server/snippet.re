@@ -46,7 +46,6 @@ module Scraper = {
              }
            )
       };
-    Js.log(segments);
     switch segments {
     | [|
         _all,
