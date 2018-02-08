@@ -12,7 +12,11 @@ module Wrapper = (
           Padding(Rem(1.)),
           MarginTop(Rem(1.)),
           Raw("font-size", "1rem"),
-          Raw("transition", "0.25s")
+          Raw("transition", "0.25s"),
+          Select(
+            ":focus",
+            [|Raw("box-shadow", "0 10px 40px 0 rgba(219,77,63,0.37), 0 2px\n9px 0 rgba(219,77,63,0.36);")|]
+          )
         |]
       )
 );

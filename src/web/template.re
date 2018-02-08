@@ -1,5 +1,4 @@
-let globalStyles = "body { margin: 0; padding: 0;} input:focus{ box-shadow: 0 10px 40px 0 rgba(219,77,63,0.37), 0 2px
-9px 0 rgba(219,77,63,0.36);}";
+let globalStyles = "body { margin: 0; padding: 0;}";
 
 let make = (~body, ~styles, ~title, ()) => {j|
   <!DOCTYPE html>
