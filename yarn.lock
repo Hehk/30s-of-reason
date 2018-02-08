@@ -542,9 +542,9 @@ bs-graphql@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/bs-graphql/-/bs-graphql-0.3.1.tgz#799a56554dafa362b18beba8f30ba94eb450d8f0"
 
-"bs-nice@https://github.com/hehk/bs-nice":
+"bs-nice@http://github.com/hehk/bs-nice":
   version "0.1.5"
-  resolved "https://github.com/hehk/bs-nice#2d365c0abaca6a56d3f0a023335884a4b2544796"
+  resolved "http://github.com/hehk/bs-nice#36ad2c12700833c2e7d1d18b4b2bbf8d81e472bf"
 
 bs-platform@^2.1.0:
   version "2.1.0"

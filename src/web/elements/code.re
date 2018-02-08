@@ -1,11 +1,11 @@
 include (
   val NiceComponents.code(
         ~debugName="Code",
-        [
-          Raw("background-color", "#f8faff"),
+        [|
+          BackgroundColor(Hex("f8faff")),
           Display(Block),
-          Raw("padding", "1rem"),
+          Padding(Rem(1.)),
           BorderRadius(Px(3))
-        ]
+        |]
       )
 );
