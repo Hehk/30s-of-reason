@@ -19,7 +19,6 @@ let component = ReasonReact.statelessComponent("snippets");
 let make = (~filter="", _children) => {
   ...component,
   render: _self => {
-    Js.log(filter);
     let snippetQuery = SnippetQuery.make(~filter, ());
     <PageFrame>
       <Query query=snippetQuery>
@@ -41,7 +40,7 @@ let make = (~filter="", _children) => {
                         </Card>
                       }
                     )
-                 |> ReasonReact.arrayToElement
+                 |> ReasonReact.arrayToElement;
                }
            )
       </Query>
