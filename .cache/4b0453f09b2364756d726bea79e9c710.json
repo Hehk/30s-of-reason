@@ -1,0 +1,1 @@
+{"dependencies":[{"name":"./GraphQLError","loc":{"line":8,"column":28}}],"generated":{"js":"\"use strict\";Object.defineProperty(exports,\"__esModule\",{value:!0}),exports.syntaxError=e;var r=require(\"./GraphQLError\");function e(e,o,t){return new r.GraphQLError(\"Syntax Error: \"+t,void 0,e,[o])}"},"hash":"2d260903bfd7f562b01aefb54cb0bd6d","cacheData":{"env":{}}}

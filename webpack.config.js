@@ -1,14 +1,18 @@
 const webpack = require("webpack");
 const path = require("path");
+const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
 
 const dir = p => path.resolve(__dirname, p);
 module.exports = {
   entry: "./lib/js/src/web/browser.bs.js",
   output: {
-    path: dir("./build/assets"),
+    path: dir("./dist"),
     publicPath: "/",
     filename: "bundle.js"
   },
+  plugins: [
+    new UglifyWebpackPlugin()
+  ],
   module: {
     loaders: [
       {

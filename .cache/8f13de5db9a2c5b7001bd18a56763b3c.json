@@ -1,0 +1,1 @@
+{"dependencies":[{"name":"./zen-observable.js","loc":{"line":1,"column":25}}],"generated":{"js":"module.exports=require(\"./zen-observable.js\").Observable;"},"hash":"cbff1764abaa043fe258fec19ed96251","cacheData":{"env":{}}}

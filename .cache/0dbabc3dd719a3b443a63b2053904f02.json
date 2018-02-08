@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"\"use strict\";Object.defineProperty(exports,\"__esModule\",{value:!0});var e=exports.FetchType=void 0;!function(e){e[e.normal=1]=\"normal\",e[e.refetch=2]=\"refetch\",e[e.poll=3]=\"poll\"}(e||(exports.FetchType=e={}));"},"hash":"d6a1190fc9a5a2186c885dfbf59c87b4","cacheData":{"env":{}}}

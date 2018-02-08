@@ -13,7 +13,7 @@ let make = (~body, ~styles, ~title, ()) => {j|
         <div id="react-root">$body</div>
       </body>
 
-      <script src="assets/bundle.js"></script>
+      <script src="dist/bundle.js"></script>
     </html>
 |j};
 

@@ -4,8 +4,8 @@
   "scripts": {
     "build": "bsb -make-world",
     "watch": "bsb -make-world -w",
-    "start": "nodemon lib/js/src/index.bs.js",
-    "webpack": "webpack --watch",
+    "start-server": "nodemon lib/js/src/index.bs.js",
+    "start-web": "webpack --watch",
     "clean": "bsb -clean-world"
   },
   "keywords": [
@@ -16,7 +16,9 @@
   "devDependencies": {
     "bs-platform": "^2.1.0",
     "graphql_ppx": "^0.0.1",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "uglifyjs-webpack-plugin": "^1.1.8",
+    "webpack": "^3.10.0"
   },
   "dependencies": {
     "algoliasearch": "^3.24.9",
@@ -37,8 +39,6 @@
     "graphql-tag": "^2.6.1",
     "graphql-tools": "^2.19.0",
     "reason-apollo": "^0.6.12",
-    "reason-react": "^0.3.1",
-    "webpack": "^3.10.0",
-    "webpack-node-externals": "^1.6.0"
+    "reason-react": "^0.3.1"
   }
 }

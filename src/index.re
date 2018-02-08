@@ -26,10 +26,10 @@ Express.App.useOnPath(app, graphiqlMiddleware, ~path="/graphiql");
 
 Express.App.useOnPath(
   app,
-  ~path="/assets",
+  ~path="/dist",
   {
     let options = Express.Static.defaultOptions();
-    Express.Static.make("build/assets/", options) |> Express.Static.asMiddleware;
+    Express.Static.make("dist", options) |> Express.Static.asMiddleware;
   }
 );
 
