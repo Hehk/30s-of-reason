@@ -1,1 +1,0 @@
-{"dependencies":[],"generated":{"js":"\"use strict\";function e(e,n){for(var o=/\\r\\n|[\\n\\r]/g,r=1,t=n+1,i=void 0;(i=o.exec(e.body))&&i.index<n;)r+=1,t=n+1-(i.index+i[0].length);return{line:r,column:t}}Object.defineProperty(exports,\"__esModule\",{value:!0}),exports.getLocation=e;"},"hash":"4637f0eb0e6f7c6da627fc9e3038aedb","cacheData":{"env":{}}}
