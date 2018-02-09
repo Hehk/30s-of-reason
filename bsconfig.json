@@ -22,7 +22,8 @@
     "bs-apollo-server-express",
     "reason-react",
     "reason-apollo",
-    "bs-nice"
+    "bs-nice",
+    "bs-nice-components"
   ],
   "reason": {
     "react-jsx": 2

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "build": "bsb -make-world",
-    "watch": "bsb -make-world -w",
+    "start": "bsb -make-world -w",
     "start-server": "nodemon lib/js/src/index.bs.js",
     "start-web": "webpack --watch",
     "clean": "bsb -clean-world"
@@ -34,6 +34,7 @@
     "bs-graphql": "^0.3.1",
     "bs-graphql-tools": "^0.3.1",
     "bs-nice": "http://github.com/hehk/bs-nice",
+    "bs-nice-components": "^0.1.0",
     "express": "^4.16.2",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
