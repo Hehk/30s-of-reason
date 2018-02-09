@@ -1,12 +1,14 @@
 open Utils;
 
-module JsSnippetQuery = [%graphql {|
+module JsSnippetQuery = [%graphql
+  {|
 query getJsSnippet($id: ID!) {
   snippet(id: $id) {
     jsOutput
   }
 }
-|}];
+|}
+];
 
 module Query = Apollo.Client.Query;
 
@@ -24,7 +26,7 @@ let make = (~id, _children) => {
              | Failed(_error) => str_to_ele("error")
              | Loaded(result) =>
                let snippet = parse(result)##snippet;
-               <Code> (str_to_ele(snippet##jsOutput)) </Code>;
+               <Code text=snippet##jsOutput language="js" />;
              }
          )
     </Query>;

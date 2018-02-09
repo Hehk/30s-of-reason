@@ -20,6 +20,6 @@ let make = _children => {
     <Background>
       <Header />
       <Search value=state.search onChange=(newValue => send(ChangeSearch(newValue))) />
-      <Snippets filter=state.search />
+      <SnippetList filter=state.search />
     </Background>
 };

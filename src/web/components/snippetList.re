@@ -34,15 +34,16 @@ let make = (~filter="", _children) => {
                       switch snippet {
                       | None => <div> (str_to_ele("failed")) </div>
                       | Some(x) =>
-                        <Card key=x##id>
-                          <H3> (str_to_ele(x##title)) </H3>
-                          <P> (str_to_ele(x##description)) </P>
-                          <Code> (str_to_ele(x##content)) </Code>
-                          <JsSnippet id=x##id />
-                        </Card>
+                        <SnippetItem
+                          key=x##id
+                          id=x##id
+                          title=x##title
+                          description=x##description
+                          content=x##content
+                        />
                       }
                     )
-                 |> ReasonReact.arrayToElement;
+                 |> ReasonReact.arrayToElement
                }
            )
       </Query>

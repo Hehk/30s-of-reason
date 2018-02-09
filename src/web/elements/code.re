@@ -1,4 +1,6 @@
-include (
+open Utils;
+
+module Wrapper = (
   val NiceComponents.code(
         ~debugName="Code",
         [|
@@ -9,3 +11,11 @@ include (
         |]
       )
 );
+let component = ReasonReact.statelessComponent("Code");
+
+let make = (~text, ~language="re", _children) => {
+  ...component,
+  render: (_self) => <Wrapper>
+      (str_to_ele(text)) 
+    </Wrapper>
+};

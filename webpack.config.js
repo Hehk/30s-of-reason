@@ -11,7 +11,7 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
-    new UglifyWebpackPlugin()
+    // new UglifyWebpackPlugin()
   ],
   module: {
     loaders: [
