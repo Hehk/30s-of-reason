@@ -6,6 +6,7 @@
     "watch": "bsb -make-world -w",
     "start-server": "nodemon lib/js/src/index.bs.js",
     "start-web": "webpack --watch",
+    "start-reason": "bsb -make-world -w",
     "clean": "bsb -clean-world"
   },
   "keywords": [

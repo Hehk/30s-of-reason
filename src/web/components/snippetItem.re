@@ -3,7 +3,21 @@ open Utils;
 module Toggle = (
   val NiceComponents.span(
         ~debugName="SnippetToggle",
-        [|Raw("float", "right"), Color(Hex("db4d3f"))|]
+        [|
+          Raw("float", "right"),
+          Color(Hex("db4d3f")),
+          Raw("transition", "0.25s ease"),
+          Padding(Rem(0.5)),
+          BorderRadius(Px(3)),
+          Select(
+            ":hover",
+            [|
+              BackgroundColor(Hex("db4d3f")),
+              Color(White),
+              Raw("box-shadow", "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)")
+            |]
+          )
+        |]
       )
 );
 

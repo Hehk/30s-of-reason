@@ -12,6 +12,7 @@ include (
           MarginTop(Rem(1.)),
           MarginBottom(Rem(1.)),
           Padding(Rem(1.)),
+          PaddingBottom(Px(1))
         |]
       )
 );
