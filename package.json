@@ -34,7 +34,7 @@
     "bs-graphql": "^0.3.1",
     "bs-graphql-tools": "^0.3.1",
     "bs-nice": "http://github.com/hehk/bs-nice",
-    "bs-nice-components": "^0.1.0",
+    "bs-nice-components": "http://github.com/hehk/bs-nice-components",
     "express": "^4.16.2",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",

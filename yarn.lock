@@ -561,12 +561,12 @@ bs-graphql@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/bs-graphql/-/bs-graphql-0.3.1.tgz#799a56554dafa362b18beba8f30ba94eb450d8f0"
 
-bs-nice-components@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/bs-nice-components/-/bs-nice-components-0.1.0.tgz#1e84cef64b66482e463d92f11f57dfc566d208bf"
+"bs-nice-components@http://github.com/hehk/bs-nice-components":
+  version "0.1.1"
+  resolved "http://github.com/hehk/bs-nice-components#e3cd0e7ed389f95475082224edec6b31c074bba7"
   dependencies:
     bs-enzyme "^0.3.1"
-    bs-nice "^0.1.6"
+    bs-nice "http://github.com/hehk/bs-nice"
     reason-react "^0.3.2"
 
 bs-nice@^0.1.6:
