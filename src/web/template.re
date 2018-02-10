@@ -18,6 +18,6 @@ let make = (~body, ~styles, ~title, ()) => {j|
 |j};
 
 let generateStyles = (~html="", ()) => {
-  let css = Nice.extract(html).css |> List.fold_left((a, b) => a ++ b, "");
+  let css = NiceComponents.getStyles(html);
   {j|<style type="text/css">$globalStyles$css</style>|j}
 };

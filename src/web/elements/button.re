@@ -1,5 +1,5 @@
 include (
-  val NiceComponents.div(
+  val NiceComponents.button(
     ~debugName="Button",
         [|
           Color(White),

@@ -1,6 +1,6 @@
 include (
-  val NiceComponents.h1(
-        ~debugName="H1",
+  val NiceComponents.h2(
+        ~debugName="H2",
         [|
           Raw("font-size", "1.5rem"),
           Margin(Px(0)),
