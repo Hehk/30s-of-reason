@@ -569,10 +569,6 @@ bs-graphql@^0.3.1:
     bs-nice "http://github.com/hehk/bs-nice"
     reason-react "^0.3.2"
 
-bs-nice@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/bs-nice/-/bs-nice-0.1.6.tgz#69de4059eeba6fd15252ce76c55be0e0fee4cf2b"
-
 "bs-nice@http://github.com/hehk/bs-nice":
   version "0.1.5"
   resolved "http://github.com/hehk/bs-nice#36ad2c12700833c2e7d1d18b4b2bbf8d81e472bf"

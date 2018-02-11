@@ -19,7 +19,13 @@ let make = _children => {
   render: ({state, send}) =>
     <Background>
       <Header />
-      <Search value=state.search onChange=(newValue => send(ChangeSearch(newValue))) />
-      <SnippetList filter=state.search />
+      <PageFrame>
+        <Search
+          value=state.search
+          onChange=(newValue => send(ChangeSearch(newValue)))
+        />
+        <Divider />
+        <SnippetList filter=state.search />
+      </PageFrame>
     </Background>
 };

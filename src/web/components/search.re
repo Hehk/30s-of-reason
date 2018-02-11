@@ -26,5 +26,5 @@ let component = ReasonReact.statelessComponent("Search");
 let make = (~value="", ~onChange=_newValue => (), _children) => {
   ...component,
   render: _self =>
-    <PageFrame> <Wrapper props={"value": value, "onChange": e => onChange(e##target##value)} /> </PageFrame>
+    <Wrapper props={"value": value, "onChange": e => onChange(e##target##value)} />
 };
