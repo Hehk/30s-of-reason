@@ -20,8 +20,7 @@ let rec createSections = (~sections=[], snippets) =>
   switch snippets {
   | [] => List.rev(sections)
   | [hd, ..._] =>
-    let (newSection, tl) =
-      List.partition(x => x##section === hd##section, snippets);
+    let (newSection, tl) = List.partition(x => x##section === hd##section, snippets);
     createSections(tl, ~sections=[newSection, ...sections]);
   };
 
@@ -59,8 +58,9 @@ let make = (~filter="", _children) => {
                       | [hd, ..._] as section => {
                           let sectionName = hd##section;
                           [
-                            <Divider key=("divider-" ++ sectionName) />,
-                            ele_of_str(sectionName),
+                            <H2 key=("section-" ++ sectionName)>
+                              (ele_of_str(sectionName))
+                            </H2>,
                             ...section
                                |> List.map(x =>
                                     <SnippetItem

@@ -41,7 +41,7 @@ Express.App.useOnPath(
       ReactDOMServerRe.renderToString(
         <Background>
           <Header />
-          <PageFrame> <Search /> <Divider /> <SnippetsLoading /> </PageFrame>
+          <PageFrame> <Search />  <SnippetsLoading /> </PageFrame>
         </Background>
       );
     let styles = Template.generateStyles(~html=body, ());
