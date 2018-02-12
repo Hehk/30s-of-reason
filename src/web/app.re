@@ -27,7 +27,6 @@ let make = _children => {
       <Header />
       <PageFrame>
         <Search onChange=(changeSearch(send)) />
-        <Divider />
         <SnippetList filter=state.search />
       </PageFrame>
     </Background>

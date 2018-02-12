@@ -1,4 +1,5 @@
-/* @title List :: Reduce */
+/* @title Reduce */
+/* @section List */
 /* @description hope this works */
 /* @content */
 let reduce = List.fold_left;
