@@ -2,8 +2,11 @@
 .merlin
 .bsb.lock
 npm-debug.log
-/lib/*
 /node_modules/
-/dist
 
+# Build assets
+/lib/*
+/build/*
+
+# My pesky vim
 *.swp
