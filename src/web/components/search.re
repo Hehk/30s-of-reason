@@ -8,31 +8,44 @@ module Wrapper = (
           BorderRadius(Px(3)),
           Display(Block),
           Width(Percent(100.)),
-          Raw(
-            "box-shadow",
-            "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
-          ),
+          Raw("box-shadow", "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"),
           Padding(Rem(1.)),
           MarginTop(Rem(1.)),
           Raw("font-size", "1rem"),
           Raw("transition", "0.25s"),
           Select(
             ":focus",
-            [|
-              Raw(
-                "box-shadow",
-                "0 10px 40px 0 rgba(219,77,63,0.37), 0 2px\n9px 0 rgba(219,77,63,0.36);"
-              )
-            |]
+            [|Raw("box-shadow", "0 10px 40px 0 rgba(219,77,63,0.37), 0 2px\n9px 0 rgba(219,77,63,0.36);")|]
           )
         |]
       )
 );
 
-let component = ReasonReact.statelessComponent("Search");
+type state = {value: string};
 
-let make = (~value="", ~onChange=_newValue => (), _children) => {
+type action =
+  | ChangeValue(string);
+
+let component = ReasonReact.reducerComponent("Search");
+
+let reducer = (action, _state) =>
+  switch action {
+  | ChangeValue(newValue) => ReasonReact.Update({value: newValue})
+  };
+
+let make = (~initialValue="", ~onChange=_newValue => (), _children) => {
   ...component,
-  render: _self =>
-    <Wrapper props={"value": value, "onChange": e => onChange(e##target##value)} />
+  initialState: () => {value: initialValue},
+  reducer,
+  render: ({send, state}) =>
+    <Wrapper
+      props={
+        "value": state.value,
+        "onChange": e => {
+          let value = e##target##value;
+          send(ChangeValue(value));
+          onChange(value);
+        }
+      }
+    />
 };

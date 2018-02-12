@@ -40,6 +40,7 @@
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
     "graphql-tools": "^2.19.0",
+    "lodash.debounce": "^4.0.8",
     "reason-apollo": "^0.6.12",
     "reason-react": "^0.3.1"
   }

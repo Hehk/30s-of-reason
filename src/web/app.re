@@ -3,6 +3,12 @@ type state = {search: string};
 type actions =
   | ChangeSearch(string);
 
+let changeSearch = send => {
+  open Utils.Debounce;
+  let update = make(newValue => send(ChangeSearch(newValue)), ~wait=250);
+  newValue => update |> call(newValue);
+};
+
 let reducer = (action, _state) =>
   switch action {
   | ChangeSearch(newValue) => ReasonReact.Update({search: newValue})
@@ -20,10 +26,7 @@ let make = _children => {
     <Background>
       <Header />
       <PageFrame>
-        <Search
-          value=state.search
-          onChange=(newValue => send(ChangeSearch(newValue)))
-        />
+        <Search onChange=(changeSearch(send)) />
         <Divider />
         <SnippetList filter=state.search />
       </PageFrame>
