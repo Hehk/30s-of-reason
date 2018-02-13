@@ -12197,11 +12197,11 @@ var Wrapper = NiceComponents.code(/* Some */["Code"], /* array */[
       /* Padding */Block.__(18, [Theme$Server.Spacing[/* normal */0]]),
       /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
       /* MarginBottom */Block.__(15, [Theme$Server.Spacing[/* normal */0]]),
-      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* black */3]]),
-      /* Color */Block.__(63, [Theme$Server.Colors[/* gray */4]]),
+      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* black */4]]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* gray */5]]),
       /* Raw */Block.__(88, [
           "box-shadow",
-          Theme$Server.Frame[/* boxShadow */1]
+          Theme$Server.Frame[/* Shadow */1][/* normal */0]
         ]),
       /* Raw */Block.__(88, [
           "font-size",
@@ -12222,7 +12222,7 @@ var LineNumber = NiceComponents.span(/* Some */["LineNumber"], /* array */[
           "user-select",
           "none"
         ]),
-      /* Color */Block.__(63, [Theme$Server.Colors[/* darkGray */5]])
+      /* Color */Block.__(63, [Theme$Server.Colors[/* darkGray */6]])
     ]);
 
 var Language = NiceComponents.span(/* Some */["Language"], /* array */[
@@ -31020,7 +31020,7 @@ var component = ReasonReact.statelessComponent("Header");
 
 var Wrapper = NiceComponents.header(/* Some */["HeaderWrapper"], /* array */[
       /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* red */0]]),
-      /* Color */Block.__(63, [Theme$Server.Colors[/* white */2]]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* white */3]]),
       /* Padding */Block.__(18, [Theme$Server.Spacing[/* large */3]]),
       /* Raw */Block.__(88, [
           "font-size",
@@ -31029,7 +31029,7 @@ var Wrapper = NiceComponents.header(/* Some */["HeaderWrapper"], /* array */[
     ]);
 
 var Logo = NiceComponents.div(/* Some */["HeaderLogo"], /* array */[
-      /* Color */Block.__(63, [Theme$Server.Colors[/* white */2]]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* white */3]]),
       /* Raw */Block.__(88, [
           "display",
           "inline"
@@ -36664,7 +36664,7 @@ var Wrapper = NiceComponents.input(/* Some */["SearchWrapper"], /* array */[
       /* Width */Block.__(1, [/* Percent */Block.__(3, [100])]),
       /* Raw */Block.__(88, [
           "box-shadow",
-          Theme$Server.Frame[/* boxShadow */1]
+          Theme$Server.Frame[/* Shadow */1][/* normal */0]
         ]),
       /* Padding */Block.__(18, [Theme$Server.Spacing[/* normal */0]]),
       /* MarginTop */Block.__(14, [Theme$Server.Spacing[/* normal */0]]),
@@ -36674,13 +36674,13 @@ var Wrapper = NiceComponents.input(/* Some */["SearchWrapper"], /* array */[
         ]),
       /* Raw */Block.__(88, [
           "transition",
-          "0.25s"
+          Theme$Server.Animation[/* Transition */0][/* normal */0]
         ]),
       /* Select */Block.__(84, [
           ":focus",
           /* array */[/* Raw */Block.__(88, [
                 "box-shadow",
-                "0 10px 40px 0 rgba(219,77,63,0.37), 0 2px\n9px 0 rgba(219,77,63,0.36);"
+                Theme$Server.Frame[/* Shadow */1][/* red */2]
               ])]
         ])
     ]);
@@ -36737,7 +36737,7 @@ var NiceComponents = __webpack_require__(6);
 var include = NiceComponents.div(/* Some */["Background"], /* array */[
       /* MinHeight */Block.__(9, [/* Vh */Block.__(5, [100])]),
       /* FontFamily */Block.__(64, ["Karla, sans-serif"]),
-      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* secondary */1]]),
+      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* secondary */2]]),
       /* Height */Block.__(2, [/* Percent */Block.__(3, [100])])
     ]);
 
@@ -44111,7 +44111,7 @@ var Toggle = NiceComponents.span(/* Some */["SnippetToggle"], /* array */[
       /* Color */Block.__(63, [Theme$Server.Colors[/* red */0]]),
       /* Raw */Block.__(88, [
           "transition",
-          "0.25s ease"
+          Theme$Server.Animation[/* Transition */0][/* normal */0]
         ]),
       /* Padding */Block.__(18, [Theme$Server.Spacing[/* small */1]]),
       /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
@@ -44119,7 +44119,7 @@ var Toggle = NiceComponents.span(/* Some */["SnippetToggle"], /* array */[
           ":hover",
           /* array */[
             /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* red */0]]),
-            /* Color */Block.__(63, [Theme$Server.Colors[/* white */2]]),
+            /* Color */Block.__(63, [Theme$Server.Colors[/* white */3]]),
             /* Raw */Block.__(88, [
                 "box-shadow",
                 "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
@@ -44245,7 +44245,7 @@ var NiceComponents = __webpack_require__(6);
 var include = NiceComponents.div(/* Some */["Card"], /* array */[
       /* Raw */Block.__(88, [
           "box-shadow",
-          "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
+          Theme$Server.Frame[/* Shadow */1][/* normal */0]
         ]),
       /* BackgroundColor */Block.__(49, [/* White */142]),
       /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
@@ -44871,21 +44871,24 @@ var Block = __webpack_require__(2);
 
 var Colors_000 = /* red : Hex */Block.__(4, ["db4d3f"]);
 
-var Colors_001 = /* secondary : Hex */Block.__(4, ["f8faff"]);
+var Colors_001 = /* lightRed : Hex */Block.__(4, ["F2826E"]);
 
-var Colors_003 = /* black : Hex */Block.__(4, ["282C34"]);
+var Colors_002 = /* secondary : Hex */Block.__(4, ["f8faff"]);
 
-var Colors_004 = /* gray : Hex */Block.__(4, ["ABB2BF"]);
+var Colors_004 = /* black : Hex */Block.__(4, ["282C34"]);
 
-var Colors_005 = /* darkGray : Hex */Block.__(4, ["5C6370"]);
+var Colors_005 = /* gray : Hex */Block.__(4, ["ABB2BF"]);
+
+var Colors_006 = /* darkGray : Hex */Block.__(4, ["5C6370"]);
 
 var Colors = /* module */[
   Colors_000,
   Colors_001,
+  Colors_002,
   /* white : White */142,
-  Colors_003,
   Colors_004,
-  Colors_005
+  Colors_005,
+  Colors_006
 ];
 
 var Size = /* module */[
@@ -44915,17 +44918,28 @@ var Spacing = /* module */[
   Spacing_003
 ];
 
-var Frame_000 = /* borderRadius : Px */Block.__(0, [8]);
+var Shadow = /* module */[
+  /* normal */"0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)",
+  /* darker */"0 10px 40px 0 rgba(62,57,107,0.20), 0 2px 9px 0 rgba(62,57,107,0.20)",
+  /* red */"0 10px 40px 0 rgba(219,77,63,0.37), 0 2px 9px 0 rgba(219,77,63,0.36);"
+];
+
+var Frame_000 = /* borderRadius : Rem */Block.__(2, [0.3]);
 
 var Frame = /* module */[
   Frame_000,
-  /* boxShadow */"0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
+  /* Shadow */Shadow
 ];
 
-exports.Colors  = Colors;
-exports.Font    = Font;
-exports.Spacing = Spacing;
-exports.Frame   = Frame;
+var Transition = /* module */[/* normal */"0.25s ease"];
+
+var Animation = /* module */[/* Transition */Transition];
+
+exports.Colors    = Colors;
+exports.Font      = Font;
+exports.Spacing   = Spacing;
+exports.Frame     = Frame;
+exports.Animation = Animation;
 /* No side effect */
 
 

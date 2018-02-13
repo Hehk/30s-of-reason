@@ -10,15 +10,12 @@ module Wrapper = (
           BorderRadius(Frame.borderRadius),
           Display(Block),
           Width(Percent(100.)),
-          Raw("box-shadow", Frame.boxShadow),
+          Raw("box-shadow", Frame.Shadow.normal),
           Padding(Spacing.normal),
           MarginTop(Spacing.normal),
           Raw("font-size", Font.Size.normal),
-          Raw("transition", "0.25s"),
-          Select(
-            ":focus",
-            [|Raw("box-shadow", "0 10px 40px 0 rgba(219,77,63,0.37), 0 2px\n9px 0 rgba(219,77,63,0.36);")|]
-          )
+          Raw("transition", Animation.Transition.normal),
+          Select(":focus", [|Raw("box-shadow", Frame.Shadow.red)|])
         |]
       )
 );

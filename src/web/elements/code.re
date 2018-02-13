@@ -12,7 +12,7 @@ module Wrapper = (
           MarginBottom(Spacing.normal),
           BackgroundColor(Colors.black),
           Color(Colors.gray),
-          Raw("box-shadow", Frame.boxShadow),
+          Raw("box-shadow", Frame.Shadow.normal),
           Raw("font-size", "1rem"),
           LineHeight(1.5)
         |]

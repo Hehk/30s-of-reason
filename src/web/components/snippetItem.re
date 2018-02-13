@@ -8,7 +8,7 @@ module Toggle = (
         [|
           Raw("float", "right"),
           Color(Colors.red),
-          Raw("transition", "0.25s ease"),
+          Raw("transition", Animation.Transition.normal),
           Padding(Spacing.small),
           BorderRadius(Frame.borderRadius),
           Select(
