@@ -16,7 +16,7 @@ module Toggle = (
             [|
               BackgroundColor(Colors.red),
               Color(Colors.white),
-              Raw("box-shadow", "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)")
+              Raw("box-shadow", Frame.Shadow.red)
             |]
           )
         |]
