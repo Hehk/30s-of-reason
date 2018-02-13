@@ -2,16 +2,18 @@ open Nice;
 
 open Utils;
 
+open Theme;
+
 let component = ReasonReact.statelessComponent("Header");
 
 module Wrapper = (
   val NiceComponents.header(
         ~debugName="HeaderWrapper",
         [|
-          BackgroundColor(RGBa(219, 77, 63, 1.)),
-          Color(White),
-          Padding(Px(20)),
-          Raw("font-size", "1.25rem")
+          BackgroundColor(Colors.red),
+          Color(Colors.white),
+          Padding(Spacing.large),
+          Raw("font-size", Font.Size.large)
         |]
       )
 );
@@ -19,7 +21,7 @@ module Wrapper = (
 module Logo = (
   val NiceComponents.div(
         ~debugName="HeaderLogo",
-        [|Color(White), Raw("display", "inline"), FontWeight(Bold)|]
+        [|Color(Colors.white), Raw("display", "inline"), FontWeight(Bold)|]
       )
 );
 
@@ -29,8 +31,8 @@ module Nav = (
         [|
           Raw("list-style", "none"),
           Raw("float", "right"),
-          Padding(Px(0)),
-          Margin(Px(0))
+          Padding(Spacing.none),
+          Margin(Spacing.none)
         |]
       )
 );
@@ -38,7 +40,7 @@ module Nav = (
 module NavItem = (
   val NiceComponents.li(
         ~debugName="HeaderNavItem",
-        [|Raw("float", "right"), MarginLeft(Px(30))|]
+        [|Raw("float", "right"), MarginLeft(Spacing.large)|]
       )
 );
 

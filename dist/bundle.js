@@ -12188,19 +12188,20 @@ var Block          = __webpack_require__(2);
 var Curry          = __webpack_require__(1);
 var Pervasives     = __webpack_require__(14);
 var ReasonReact    = __webpack_require__(4);
+var Theme$Server   = __webpack_require__(181);
 var Utils$Server   = __webpack_require__(18);
 var NiceComponents = __webpack_require__(6);
 
 var Wrapper = NiceComponents.code(/* Some */["Code"], /* array */[
       /* Display */Block.__(0, [/* Block */1]),
-      /* Padding */Block.__(18, [/* Rem */Block.__(2, [1])]),
-      /* BorderRadius */Block.__(55, [/* Px */Block.__(0, [3])]),
-      /* MarginBottom */Block.__(15, [/* Rem */Block.__(2, [1])]),
-      /* BackgroundColor */Block.__(49, [/* Hex */Block.__(4, ["282C34"])]),
-      /* Color */Block.__(63, [/* Hex */Block.__(4, ["ABB2BF"])]),
+      /* Padding */Block.__(18, [Theme$Server.Spacing[/* normal */0]]),
+      /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
+      /* MarginBottom */Block.__(15, [Theme$Server.Spacing[/* normal */0]]),
+      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* black */3]]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* gray */4]]),
       /* Raw */Block.__(88, [
           "box-shadow",
-          "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
+          Theme$Server.Frame[/* boxShadow */1]
         ]),
       /* Raw */Block.__(88, [
           "font-size",
@@ -12221,7 +12222,7 @@ var LineNumber = NiceComponents.span(/* Some */["LineNumber"], /* array */[
           "user-select",
           "none"
         ]),
-      /* Color */Block.__(63, [/* Hex */Block.__(4, ["5C6370"])])
+      /* Color */Block.__(63, [Theme$Server.Colors[/* darkGray */5]])
     ]);
 
 var Language = NiceComponents.span(/* Some */["Language"], /* array */[
@@ -12229,7 +12230,7 @@ var Language = NiceComponents.span(/* Some */["Language"], /* array */[
           "float",
           "right"
         ]),
-      /* Color */Block.__(63, [/* Hex */Block.__(4, ["db4d3f"])])
+      /* Color */Block.__(63, [Theme$Server.Colors[/* red */0]])
     ]);
 
 var component = ReasonReact.statelessComponent("Code");
@@ -31010,6 +31011,7 @@ exports.createClass          = createClass;
 var Block            = __webpack_require__(2);
 var Curry            = __webpack_require__(1);
 var ReasonReact      = __webpack_require__(4);
+var Theme$Server     = __webpack_require__(181);
 var Utils$Server     = __webpack_require__(18);
 var NiceComponents   = __webpack_require__(6);
 var PageFrame$Server = __webpack_require__(30);
@@ -31017,22 +31019,17 @@ var PageFrame$Server = __webpack_require__(30);
 var component = ReasonReact.statelessComponent("Header");
 
 var Wrapper = NiceComponents.header(/* Some */["HeaderWrapper"], /* array */[
-      /* BackgroundColor */Block.__(49, [/* RGBa */Block.__(1, [
-              219,
-              77,
-              63,
-              1
-            ])]),
-      /* Color */Block.__(63, [/* White */142]),
-      /* Padding */Block.__(18, [/* Px */Block.__(0, [20])]),
+      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* red */0]]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* white */2]]),
+      /* Padding */Block.__(18, [Theme$Server.Spacing[/* large */3]]),
       /* Raw */Block.__(88, [
           "font-size",
-          "1.25rem"
+          Theme$Server.Font[/* Size */1][/* large */1]
         ])
     ]);
 
 var Logo = NiceComponents.div(/* Some */["HeaderLogo"], /* array */[
-      /* Color */Block.__(63, [/* White */142]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* white */2]]),
       /* Raw */Block.__(88, [
           "display",
           "inline"
@@ -31049,8 +31046,8 @@ var Nav = NiceComponents.ol(/* Some */["HeaderNav"], /* array */[
           "float",
           "right"
         ]),
-      /* Padding */Block.__(18, [/* Px */Block.__(0, [0])]),
-      /* Margin */Block.__(11, [/* Px */Block.__(0, [0])])
+      /* Padding */Block.__(18, [Theme$Server.Spacing[/* none */2]]),
+      /* Margin */Block.__(11, [Theme$Server.Spacing[/* none */2]])
     ]);
 
 var NavItem = NiceComponents.li(/* Some */["HeaderNavItem"], /* array */[
@@ -31058,7 +31055,7 @@ var NavItem = NiceComponents.li(/* Some */["HeaderNavItem"], /* array */[
           "float",
           "right"
         ]),
-      /* MarginLeft */Block.__(16, [/* Px */Block.__(0, [30])])
+      /* MarginLeft */Block.__(16, [Theme$Server.Spacing[/* large */3]])
     ]);
 
 var NavLink = NiceComponents.a(/* Some */["HeaderNavLink"], /* array */[
@@ -36646,6 +36643,7 @@ exports.createClass          = createClass;
 var Block          = __webpack_require__(2);
 var Curry          = __webpack_require__(1);
 var ReasonReact    = __webpack_require__(4);
+var Theme$Server   = __webpack_require__(181);
 var NiceComponents = __webpack_require__(6);
 
 var Wrapper = NiceComponents.input(/* Some */["SearchWrapper"], /* array */[
@@ -36661,18 +36659,18 @@ var Wrapper = NiceComponents.input(/* Some */["SearchWrapper"], /* array */[
           "box-sizing",
           "border-box"
         ]),
-      /* BorderRadius */Block.__(55, [/* Px */Block.__(0, [3])]),
+      /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
       /* Display */Block.__(0, [/* Block */1]),
       /* Width */Block.__(1, [/* Percent */Block.__(3, [100])]),
       /* Raw */Block.__(88, [
           "box-shadow",
-          "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
+          Theme$Server.Frame[/* boxShadow */1]
         ]),
-      /* Padding */Block.__(18, [/* Rem */Block.__(2, [1])]),
-      /* MarginTop */Block.__(14, [/* Rem */Block.__(2, [1])]),
+      /* Padding */Block.__(18, [Theme$Server.Spacing[/* normal */0]]),
+      /* MarginTop */Block.__(14, [Theme$Server.Spacing[/* normal */0]]),
       /* Raw */Block.__(88, [
           "font-size",
-          "1rem"
+          Theme$Server.Font[/* Size */1][/* normal */2]
         ]),
       /* Raw */Block.__(88, [
           "transition",
@@ -36733,12 +36731,13 @@ exports.make      = make;
 
 
 var Block          = __webpack_require__(2);
+var Theme$Server   = __webpack_require__(181);
 var NiceComponents = __webpack_require__(6);
 
 var include = NiceComponents.div(/* Some */["Background"], /* array */[
       /* MinHeight */Block.__(9, [/* Vh */Block.__(5, [100])]),
       /* FontFamily */Block.__(64, ["Karla, sans-serif"]),
-      /* BackgroundColor */Block.__(49, [/* Hex */Block.__(4, ["f8faff"])]),
+      /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* secondary */1]]),
       /* Height */Block.__(2, [/* Percent */Block.__(3, [100])])
     ]);
 
@@ -44099,6 +44098,7 @@ var H3$Server        = __webpack_require__(173);
 var Card$Server      = __webpack_require__(174);
 var Code$Server      = __webpack_require__(72);
 var ReasonReact      = __webpack_require__(4);
+var Theme$Server     = __webpack_require__(181);
 var Utils$Server     = __webpack_require__(18);
 var NiceComponents   = __webpack_require__(6);
 var JsSnippet$Server = __webpack_require__(175);
@@ -44108,18 +44108,18 @@ var Toggle = NiceComponents.span(/* Some */["SnippetToggle"], /* array */[
           "float",
           "right"
         ]),
-      /* Color */Block.__(63, [/* Hex */Block.__(4, ["db4d3f"])]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* red */0]]),
       /* Raw */Block.__(88, [
           "transition",
           "0.25s ease"
         ]),
-      /* Padding */Block.__(18, [/* Rem */Block.__(2, [0.5])]),
-      /* BorderRadius */Block.__(55, [/* Px */Block.__(0, [3])]),
+      /* Padding */Block.__(18, [Theme$Server.Spacing[/* small */1]]),
+      /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
       /* Select */Block.__(84, [
           ":hover",
           /* array */[
-            /* BackgroundColor */Block.__(49, [/* Hex */Block.__(4, ["db4d3f"])]),
-            /* Color */Block.__(63, [/* White */142]),
+            /* BackgroundColor */Block.__(49, [Theme$Server.Colors[/* red */0]]),
+            /* Color */Block.__(63, [Theme$Server.Colors[/* white */2]]),
             /* Raw */Block.__(88, [
                 "box-shadow",
                 "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
@@ -44177,11 +44177,12 @@ exports.make         = make;
 
 
 var Block          = __webpack_require__(2);
+var Theme$Server   = __webpack_require__(181);
 var NiceComponents = __webpack_require__(6);
 
 var include = NiceComponents.p(/* Some */["P"], /* array */[
-      /* Margin */Block.__(11, [/* Px */Block.__(0, [0])]),
-      /* MarginBottom */Block.__(15, [/* Rem */Block.__(2, [1])])
+      /* Margin */Block.__(11, [Theme$Server.Spacing[/* none */2]]),
+      /* MarginBottom */Block.__(15, [Theme$Server.Spacing[/* normal */0]])
     ]);
 
 var className = include[0];
@@ -44205,12 +44206,13 @@ exports.make      = make;
 
 
 var Block          = __webpack_require__(2);
+var Theme$Server   = __webpack_require__(181);
 var NiceComponents = __webpack_require__(6);
 
 var include = NiceComponents.h3(/* Some */["H3"], /* array */[
       /* Raw */Block.__(88, [
           "font-size",
-          "1.25rem"
+          Theme$Server.Font[/* Size */1][/* normal */2]
         ]),
       /* Margin */Block.__(11, [/* Px */Block.__(0, [0])]),
       /* MarginBottom */Block.__(15, [/* Rem */Block.__(2, [1])])
@@ -44237,6 +44239,7 @@ exports.make      = make;
 
 
 var Block          = __webpack_require__(2);
+var Theme$Server   = __webpack_require__(181);
 var NiceComponents = __webpack_require__(6);
 
 var include = NiceComponents.div(/* Some */["Card"], /* array */[
@@ -44245,11 +44248,11 @@ var include = NiceComponents.div(/* Some */["Card"], /* array */[
           "0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
         ]),
       /* BackgroundColor */Block.__(49, [/* White */142]),
-      /* BorderRadius */Block.__(55, [/* Px */Block.__(0, [3])]),
-      /* Margin */Block.__(11, [/* Px */Block.__(0, [0])]),
-      /* MarginTop */Block.__(14, [/* Rem */Block.__(2, [1])]),
-      /* MarginBottom */Block.__(15, [/* Rem */Block.__(2, [1])]),
-      /* Padding */Block.__(18, [/* Rem */Block.__(2, [1])]),
+      /* BorderRadius */Block.__(55, [Theme$Server.Frame[/* borderRadius */0]]),
+      /* Margin */Block.__(11, [Theme$Server.Spacing[/* none */2]]),
+      /* MarginTop */Block.__(14, [Theme$Server.Spacing[/* normal */0]]),
+      /* MarginBottom */Block.__(15, [Theme$Server.Spacing[/* normal */0]]),
+      /* Padding */Block.__(18, [Theme$Server.Spacing[/* normal */0]]),
       /* PaddingBottom */Block.__(22, [/* Px */Block.__(0, [1])])
     ]);
 
@@ -44829,17 +44832,18 @@ module.exports = debounce;
 
 
 var Block          = __webpack_require__(2);
+var Theme$Server   = __webpack_require__(181);
 var NiceComponents = __webpack_require__(6);
 
 var include = NiceComponents.h2(/* Some */["H2"], /* array */[
       /* Raw */Block.__(88, [
           "font-size",
-          "1.5rem"
+          Theme$Server.Font[/* Size */1][/* large */1]
         ]),
-      /* Margin */Block.__(11, [/* Px */Block.__(0, [0])]),
-      /* MarginBottom */Block.__(15, [/* Rem */Block.__(2, [1])]),
-      /* MarginTop */Block.__(14, [/* Rem */Block.__(2, [2])]),
-      /* Color */Block.__(63, [/* Hex */Block.__(4, ["db4d3f"])])
+      /* Margin */Block.__(11, [Theme$Server.Spacing[/* none */2]]),
+      /* MarginBottom */Block.__(15, [Theme$Server.Spacing[/* normal */0]]),
+      /* MarginTop */Block.__(14, [Theme$Server.Spacing[/* large */3]]),
+      /* Color */Block.__(63, [Theme$Server.Colors[/* red */0]])
     ]);
 
 var className = include[0];
@@ -44852,6 +44856,77 @@ exports.className = className;
 exports.component = component;
 exports.make      = make;
 /* include Not a pure module */
+
+
+/***/ }),
+/* 180 */,
+/* 181 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Generated by BUCKLESCRIPT VERSION 2.1.0, PLEASE EDIT WITH CARE
+
+
+var Block = __webpack_require__(2);
+
+var Colors_000 = /* red : Hex */Block.__(4, ["db4d3f"]);
+
+var Colors_001 = /* secondary : Hex */Block.__(4, ["f8faff"]);
+
+var Colors_003 = /* black : Hex */Block.__(4, ["282C34"]);
+
+var Colors_004 = /* gray : Hex */Block.__(4, ["ABB2BF"]);
+
+var Colors_005 = /* darkGray : Hex */Block.__(4, ["5C6370"]);
+
+var Colors = /* module */[
+  Colors_000,
+  Colors_001,
+  /* white : White */142,
+  Colors_003,
+  Colors_004,
+  Colors_005
+];
+
+var Size = /* module */[
+  /* huge */"2rem",
+  /* large */"1.5rem",
+  /* normal */"1.25rem",
+  /* small */"1rem"
+];
+
+var Font = /* module */[
+  /* family */"Karla, sans-serif",
+  /* Size */Size
+];
+
+var Spacing_000 = /* normal : Rem */Block.__(2, [1]);
+
+var Spacing_001 = /* small : Rem */Block.__(2, [0.5]);
+
+var Spacing_002 = /* none : Rem */Block.__(2, [0]);
+
+var Spacing_003 = /* large : Rem */Block.__(2, [2.0]);
+
+var Spacing = /* module */[
+  Spacing_000,
+  Spacing_001,
+  Spacing_002,
+  Spacing_003
+];
+
+var Frame_000 = /* borderRadius : Px */Block.__(0, [8]);
+
+var Frame = /* module */[
+  Frame_000,
+  /* boxShadow */"0 10px 40px 0 rgba(62,57,107,0.07), 0 2px 9px 0 rgba(62,57,107,0.06)"
+];
+
+exports.Colors  = Colors;
+exports.Font    = Font;
+exports.Spacing = Spacing;
+exports.Frame   = Frame;
+/* No side effect */
 
 
 /***/ })
