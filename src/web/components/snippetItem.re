@@ -44,11 +44,11 @@ let make = (~id, ~title, ~description, ~content, _children) => {
   render: ({state: {jsOutput}, send}) =>
     <Card>
       <Toggle props={"onClick": () => send(ToggleJsOutput)}>
-        (jsOutput ? str_to_ele("Hide JS") : str_to_ele("Show JS"))
+        (jsOutput ? ele_of_str("Hide JS") : ele_of_str("Show JS"))
       </Toggle>
-      <H3> (str_to_ele(title)) </H3>
-      <P> (str_to_ele(description)) </P>
+      <H3> (ele_of_str(title)) </H3>
+      <P> (ele_of_str(description)) </P>
       <Code text=content />
-      (jsOutput ? <JsSnippet id /> : str_to_ele(""))
+      (jsOutput ? <JsSnippet id /> : ele_of_str(""))
     </Card>
 };

@@ -22,8 +22,8 @@ let make = (~id, _children) => {
       ...(
            (response, parse) =>
              switch response {
-             | Loading => str_to_ele("loading")
-             | Failed(_error) => str_to_ele("error")
+             | Loading => ele_of_str("loading")
+             | Failed(_error) => ele_of_str("error")
              | Loaded(result) =>
                let snippet = parse(result)##snippet;
                <Code text=snippet##jsOutput language="js" />;

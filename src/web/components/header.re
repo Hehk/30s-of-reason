@@ -57,16 +57,16 @@ let make = _children => {
     <Wrapper>
       <PageFrame>
         <Logo>
-          <NavLink props={"href": "/"}> (str_to_ele("30s of Reason")) </NavLink>
+          <NavLink props={"href": "/"}> (ele_of_str("30s of Reason")) </NavLink>
         </Logo>
         <Nav>
           <NavItem>
             <NavLink props={"href": "https://github.com/hehk/30s-of-reason"}>
-              (str_to_ele("Github"))
+              (ele_of_str("Github"))
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink props={"href": "/about"}> (str_to_ele("About")) </NavLink>
+            <NavLink props={"href": "/about"}> (ele_of_str("About")) </NavLink>
           </NavItem>
         </Nav>
       </PageFrame>

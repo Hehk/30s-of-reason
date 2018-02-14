@@ -46,7 +46,7 @@ let make = (~filter="", _children) => {
              (response, parse) =>
                switch response {
                | Loading => <SnippetsLoading />
-               | Failed(_error) => <div> (str_to_ele("error")) </div>
+               | Failed(_error) => <div> (ele_of_str("error")) </div>
                | Loaded(result) =>
                  parse(result)##allSnippets
                  |> Array.to_list
