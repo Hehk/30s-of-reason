@@ -7,7 +7,8 @@
     "start-server": "nodemon lib/js/src/index.bs.js",
     "start-web": "webpack --watch",
     "start-reason": "bsb -make-world -w",
-    "clean": "bsb -clean-world"
+    "clean": "bsb -clean-world",
+    "test": "jest --watch"
   },
   "keywords": [
     "BuckleScript"
@@ -15,6 +16,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@glennsl/bs-jest": "^0.4.1",
     "bs-platform": "^2.1.0",
     "graphql_ppx": "^0.0.1",
     "nodemon": "^1.14.11",

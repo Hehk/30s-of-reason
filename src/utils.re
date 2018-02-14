@@ -13,21 +13,9 @@ type debounceOptions = {
   "trailing": bool
 };
 
-[@bs.module]
-external _debounce :
-  ('fArgs => 'fOutput, int, debounceOptions) => [@bs] ('fArgs => 'fOutput) =
-  "lodash.debounce";
-
-let debounce = (~wait=0, ~options=Js.Obj.empty(), f) =>
-  _debounce(f, wait, options);
-
 module Debounce = {
   [@bs.module]
-  external _make :
-    ('fArgs => 'fOutput, int, debounceOptions) =>
-    [@bs] ('fArgs => 'fOutput) =
-    "lodash.debounce";
-  let make = (~wait=0, ~options=Js.Obj.empty(), f) =>
-    _make(f, wait, options);
+  external _make : ('fArgs => 'fOutput, int, debounceOptions) => [@bs] ('fArgs => 'fOutput) = "lodash.debounce";
+  let make = (~wait=0, ~options=Js.Obj.empty(), f) => _make(f, wait, options);
   let call = (input, f) => [@bs] f(input);
 };
