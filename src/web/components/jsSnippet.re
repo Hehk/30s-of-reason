@@ -10,7 +10,6 @@ query getJsSnippet($id: ID!) {
 |}
 ];
 
-
 let component = ReasonReact.statelessComponent("JsSnippet");
 
 let make = (~query as q, ~id, _children) => {
