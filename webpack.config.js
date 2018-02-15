@@ -3,7 +3,9 @@ const path = require("path");
 const UglifyWebpackPlugin = require("uglifyjs-webpack-plugin");
 
 const dir = p => path.resolve(__dirname, p);
-module.exports = {
+module.exports = env => {
+  console.log(env.browser); 
+  return {
   entry: "./lib/js/src/web/browser.bs.js",
   output: {
     path: dir("./dist"),
@@ -24,4 +26,5 @@ module.exports = {
   resolve: {
     extensions: [".js", ".bs.js"]
   }
+};
 };

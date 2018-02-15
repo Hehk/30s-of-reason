@@ -8,6 +8,7 @@
     },
     {
       "dir": "__tests__",
+      "subdirs": true,
       "type": "dev"
     },
     "snippets"
@@ -28,7 +29,8 @@
     "bs-nice-components"
   ],
   "bs-dev-dependencies": [
-    "@glennsl/bs-jest"
+    "@glennsl/bs-jest",
+    "bs-enzyme"
   ],
   "reason": {
     "react-jsx": 2

@@ -18,7 +18,7 @@ let initialState = () => {search: ""};
 
 let component = ReasonReact.reducerComponent("App");
 
-let make = _children => {
+let make = (~query, _children) => {
   ...component,
   initialState,
   reducer,
@@ -27,7 +27,7 @@ let make = _children => {
       <Header />
       <PageFrame>
         <Search onChange=(changeSearch(send)) />
-        <SnippetList filter=state.search />
+        <SnippetList query filter=state.search />
       </PageFrame>
     </Background>
 };

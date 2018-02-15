@@ -14,8 +14,6 @@ module SnippetQuery = [%graphql
 |}
 ];
 
-module Query = Apollo.Client.Query;
-
 let rec createSections = (~sections=[], snippets) =>
   switch snippets {
   | [] => List.rev(sections)
@@ -36,9 +34,10 @@ let rec filterOutVariant = (acc, l) =>
 
 let component = ReasonReact.statelessComponent("snippets");
 
-let make = (~filter="", _children) => {
+let make = (~query, ~filter="", _children) => {
   ...component,
   render: _self => {
+    module Query = (val query : Apollo.Query); 
     let snippetQuery = SnippetQuery.make(~filter, ());
     <PageFrame>
       <Query query=snippetQuery>
@@ -58,9 +57,7 @@ let make = (~filter="", _children) => {
                       | [hd, ..._] as section => {
                           let sectionName = hd##section;
                           [
-                            <H2 key=("section-" ++ sectionName)>
-                              (ele_of_str(sectionName))
-                            </H2>,
+                            <H2 key=("section-" ++ sectionName)> (ele_of_str(sectionName)) </H2>,
                             ...section
                                |> List.map(x =>
                                     <SnippetItem
@@ -69,6 +66,7 @@ let make = (~filter="", _children) => {
                                       title=x##title
                                       description=x##description
                                       content=x##content
+                                      query
                                     />
                                   )
                           ];

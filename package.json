@@ -5,7 +5,7 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "start-server": "nodemon lib/js/src/index.bs.js",
-    "start-web": "webpack --watch",
+    "start-web": "webpack --watch --env.browser",
     "start-reason": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "jest --watch"
@@ -17,8 +17,12 @@
   "license": "MIT",
   "devDependencies": {
     "@glennsl/bs-jest": "^0.4.1",
+    "bs-enzyme": "^0.3.1",
     "bs-platform": "^2.1.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "graphql_ppx": "^0.0.1",
+    "jest": "^22.3.0",
     "nodemon": "^1.14.11",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0"
@@ -30,6 +34,7 @@
     "apollo-link-context": "^1.0.3",
     "apollo-link-error": "^1.0.3",
     "apollo-link-http": "^1.3.2",
+    "apollo-link-schema": "^1.0.3",
     "body-parser": "^1.18.2",
     "bs-algolia": "^0.0.1",
     "bs-apollo-server-express": "^0.3.1",
@@ -38,6 +43,7 @@
     "bs-graphql-tools": "^0.3.1",
     "bs-nice": "http://github.com/hehk/bs-nice",
     "bs-nice-components": "http://github.com/hehk/bs-nice-components",
+    "detect-node": "^2.0.3",
     "express": "^4.16.2",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",

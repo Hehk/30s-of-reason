@@ -1,27 +1,76 @@
-open ApolloInMemoryCache;
-
-type dataObject = {
-  .
-  "__typename": string,
-  "id": string,
-  "key": string
+module type Client = {
+  module type Query = {
+    type response =
+      | Loading
+      | Loaded(Js.Json.t)
+      | Failed(string);
+    type state = {
+      response,
+      variables: Js.Json.t
+    };
+    type action =
+      | Result(string)
+      | Error(string);
+    let sendQuery: (~query: 'query, ~reducer: 'reduce) => unit;
+    let component:
+      string =>
+      ReasonReact.componentSpec(
+        state,
+        ReasonReact.stateless,
+        ReasonReact.noRetainedProps,
+        ReasonReact.noRetainedProps,
+        action
+      );
+    let make: (~query: 'query, 'children) => ReasonReact.reactClass;
+  };
+  module type Mutation = {};
 };
 
-/* Create an InMemoryCache */
-let inMemoryCache =
-  createInMemoryCache(~dataIdFromObject=(obj: dataObject) => obj##id, ());
-
-/* Create an HTTP Link */
-let httpLink = ApolloLinks.createHttpLink(~uri="/graphql", ());
-
-module Client =
-  ReasonApollo.CreateClient(
-    {
-      let apolloClient =
-        ReasonApollo.createApolloClient(
-          ~cache=inMemoryCache /* restore method can be piped e.g. inMemoryCache |> restore(window.__APOLLO__) */,
-          ~link=httpLink,
-          ()
-        );
-    }
-  );
+module type Query = {
+  type response =
+    | Loading
+    | Loaded(Js.Json.t)
+    | Failed(string);
+  type state = {
+    response,
+    variables: Js.Json.t
+  };
+  type action =
+    | Result(string)
+    | Error(string);
+  let sendQuery:
+    (
+      ~query: {
+                ..
+                "query": string,
+                "variables": Js.Json.t
+              },
+      ~reduce: (unit => action, unit) => 'a
+    ) =>
+    unit;
+  let component:
+    ReasonReact.componentSpec(
+      state,
+      ReasonReact.stateless,
+      ReasonReact.noRetainedProps,
+      ReasonReact.noRetainedProps,
+      action
+    );
+  let make:
+    (
+      ~query: {
+                ..
+                "query": string,
+                "variables": Js.Json.t,
+                "parse": 'a
+              },
+      (response, 'a) => ReasonReact.reactElement
+    ) =>
+    ReasonReact.componentSpec(
+      state,
+      state,
+      ReasonReact.noRetainedProps,
+      ReasonReact.noRetainedProps,
+      action
+    );
+};

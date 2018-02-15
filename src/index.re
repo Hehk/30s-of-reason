@@ -4,16 +4,7 @@ let app = Express.App.make();
 external bodyParserJson : unit => Express.Middleware.t = "json";
 
 let graphqlMiddleware = {
-  let types = Snippet.graphQLType;
-  let query = {|
-    type Query {
-      allSnippets(query: String): [Snippet]!
-      snippet(id: ID!): Snippet!
-    }
-  |};
-  let snippet = Snippet.Handler.make();
-  let resolvers = {"Query": Js.Obj.empty() |> Js.Obj.assign(snippet.queries)};
-  GraphQLTools.makeExecutableSchema({"typeDefs": types ++ query, "resolvers": resolvers})
+  GraphQLTools.makeExecutableSchema(Graphql.schema)
   |> ApolloServerExpress.createGraphQLExpressMiddleware;
 };
 
@@ -38,12 +29,7 @@ Express.App.useOnPath(
   app,
   Express.Middleware.from((_req, res, _next) => {
     let body =
-      ReactDOMServerRe.renderToString(
-        <Background>
-          <Header />
-          <PageFrame> <Search />  <SnippetsLoading /> </PageFrame>
-        </Background>
-      );
+      ReactDOMServerRe.renderToString(<App query=(module ServerApollo.Client.Query) />);
     let styles = Template.generateStyles(~html=body, ());
     Express.Response.sendString(
       res,

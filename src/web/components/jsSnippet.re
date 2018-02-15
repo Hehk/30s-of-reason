@@ -10,14 +10,14 @@ query getJsSnippet($id: ID!) {
 |}
 ];
 
-module Query = Apollo.Client.Query;
 
 let component = ReasonReact.statelessComponent("JsSnippet");
 
-let make = (~id, _children) => {
+let make = (~query as q, ~id, _children) => {
   ...component,
   render: _self => {
     let query = JsSnippetQuery.make(~id, ());
+    module Query = (val q : Apollo.Query);
     <Query query>
       ...(
            (response, parse) =>
