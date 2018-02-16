@@ -29,7 +29,7 @@ Express.App.useOnPath(
   app,
   Express.Middleware.from((_req, res, _next) => {
     let body =
-      ReactDOMServerRe.renderToString(<App query=(module ServerApollo.Client.Query) />);
+      ReactDOMServerRe.renderToString(<App query=(module ApolloServer.Client.Query) />);
     let styles = Template.generateStyles(~html=body, ());
     Express.Response.sendString(
       res,

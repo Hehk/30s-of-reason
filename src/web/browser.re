@@ -9,4 +9,4 @@ let hydrateToElementWithId = (reactElement, id) =>
   | Some(element) => hydrate(reactElement, element)
   };
 
-hydrateToElementWithId(<App query=(module BrowserApollo.Client.Query)/>, "react-root");
+hydrateToElementWithId(<App query=(module ApolloBrowser.Client.Query)/>, "react-root");
