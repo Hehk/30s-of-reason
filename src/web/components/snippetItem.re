@@ -11,14 +11,7 @@ module Toggle = (
           Raw("transition", Animation.Transition.normal),
           Padding(Spacing.small),
           BorderRadius(Frame.borderRadius),
-          Select(
-            ":hover",
-            [|
-              BackgroundColor(Colors.red),
-              Color(Colors.white),
-              Raw("box-shadow", Frame.Shadow.red)
-            |]
-          )
+          Select(":hover", [|BackgroundColor(Colors.red), Color(Colors.white), Raw("box-shadow", Frame.Shadow.red)|])
         |]
       )
 );
@@ -51,4 +44,21 @@ let make = (~query, ~id, ~title, ~description, ~content, _children) => {
       <Code text=content />
       (jsOutput ? <JsSnippet query id /> : ele_of_str(""))
     </Card>
+};
+
+module Loading = {
+  module LoadingAnimation = (
+    val NiceComponents.div(~debugName="LoadingTransition", [|Raw("animation", "loadingAnimation 3s infinite ease")|])
+  );
+  let component = ReasonReact.statelessComponent("SnippetLoading");
+  let make = _children => {
+    ...component,
+    render: _self =>
+      <Card>
+        <LoadingAnimation>
+          <H3> (ele_of_str("...")) </H3>
+          <Code text="loading your future tech debt!" />
+        </LoadingAnimation>
+      </Card>
+  };
 };
