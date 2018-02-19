@@ -1,16 +1,21 @@
 open Utils;
 
-module JsSnippetQuery = [%graphql {|
+module JsSnippetQuery = [%graphql
+  {|
 query getJsSnippet($id: ID!) {
   snippet(id: $id) {
     jsOutput
   }
 }
-|}];
+|}
+];
 
 let component = ReasonReact.statelessComponent("JsSnippet");
 
-let renderLoading = () => ele_of_str("loading");
+let renderLoading = () =>
+  <LoadingAnimation>
+    <Code text="Loading the impure world" language="js" />
+  </LoadingAnimation>;
 
 let renderFailed = () => ele_of_str("failed");
 

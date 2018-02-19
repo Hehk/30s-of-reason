@@ -47,9 +47,6 @@ let make = (~query, ~id, ~title, ~description, ~content, _children) => {
 };
 
 module Loading = {
-  module LoadingAnimation = (
-    val NiceComponents.div(~debugName="LoadingTransition", [|Raw("animation", "loadingAnimation 3s infinite ease")|])
-  );
   let component = ReasonReact.statelessComponent("SnippetLoading");
   let make = _children => {
     ...component,
