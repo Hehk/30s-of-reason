@@ -1,4 +1,5 @@
-let globalStyles = "body { margin: 0; padding: 0;}";
+let globalStyles = "body { margin: 0; padding: 0;} @keyframes loadingAnimation { 0%, 100% { opacity: 0.25;} 50% {opacity:
+0.5;}}";
 
 let make = (~body, ~styles, ~title, ()) => {j|
   <!DOCTYPE html>
@@ -19,5 +20,5 @@ let make = (~body, ~styles, ~title, ()) => {j|
 
 let generateStyles = (~html="", ()) => {
   let css = NiceComponents.getStyles(html);
-  {j|<style type="text/css">$globalStyles$css</style>|j}
+  {j|<style type="text/css">$globalStyles$css</style>|j};
 };
