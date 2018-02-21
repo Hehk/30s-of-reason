@@ -8,7 +8,11 @@
     "start-web": "webpack --watch --env.browser",
     "start-reason": "bsb -make-world -w",
     "clean": "bsb -clean-world",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{re,rei}": ["refmt --in-place", "git add"]
   },
   "keywords": [
     "BuckleScript"
@@ -22,7 +26,9 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "graphql_ppx": "^0.0.1",
+    "husky": "^0.14.3",
     "jest": "^22.3.0",
+    "lint-staged": "^7.0.0",
     "nodemon": "^1.14.11",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0"

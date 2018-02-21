@@ -3,12 +3,12 @@ let app = Express.App.make();
 [@bs.module "body-parser"]
 external bodyParserJson : unit => Express.Middleware.t = "json";
 
-let graphqlMiddleware = {
+let graphqlMiddleware =
   GraphQLTools.makeExecutableSchema(Graphql.schema)
   |> ApolloServerExpress.createGraphQLExpressMiddleware;
-};
 
-let graphiqlMiddleware = ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
+let graphiqlMiddleware =
+  ApolloServerExpress.createGraphiQLExpressMiddleware("/graphql");
 
 Express.App.use(app, bodyParserJson());
 
@@ -29,7 +29,9 @@ Express.App.useOnPath(
   app,
   Express.Middleware.from((_req, res, _next) => {
     let body =
-      ReactDOMServerRe.renderToString(<App query=(module ApolloServer.Client.Query) />);
+      ReactDOMServerRe.renderToString(
+        <App query=(module ApolloServer.Client.Query) />
+      );
     let styles = Template.generateStyles(~html=body, ());
     Express.Response.sendString(
       res,
