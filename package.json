@@ -12,11 +12,10 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{re,rei}": ["refmt --in-place", "git add"]
+    "*.{re,rei}": ["refmt --in-place", "git add"],
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
-  "keywords": [
-    "BuckleScript"
-  ],
+  "keywords": ["BuckleScript"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
@@ -30,6 +29,7 @@
     "jest": "^22.3.0",
     "lint-staged": "^7.0.0",
     "nodemon": "^1.14.11",
+    "prettier": "^1.10.2",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0"
   },
