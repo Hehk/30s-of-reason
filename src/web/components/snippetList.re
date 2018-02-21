@@ -18,7 +18,8 @@ let rec createSections = (~sections=[], snippets) =>
   switch snippets {
   | [] => List.rev(sections)
   | [hd, ..._] =>
-    let (newSection, tl) = List.partition(x => x##section === hd##section, snippets);
+    let (newSection, tl) =
+      List.partition(x => x##section === hd##section, snippets);
     createSections(tl, ~sections=[newSection, ...sections]);
   };
 
@@ -40,7 +41,9 @@ let renderSections = (query, snippets) =>
        | [hd, ..._] as section => {
            let sectionName = hd##section;
            [
-             <H2 key=("section-" ++ sectionName)> (ele_of_str(sectionName)) </H2>,
+             <H2 key=("section-" ++ sectionName)>
+               (ele_of_str(sectionName))
+             </H2>,
              ...section
                 |> List.map(x =>
                      <SnippetItem
@@ -57,13 +60,13 @@ let renderSections = (query, snippets) =>
      )
   |> List.flatten;
 
-let component = ReasonReact.statelessComponent("snippets");
+let component = ReasonReact.statelessComponent("SnippetList");
 
 let renderLoading = () =>
   [
-    <H2> (ele_of_str("Loading")) </H2>,
-    <SnippetItem.Loading />,
-    <SnippetItem.Loading />
+    <H2 key="loading-header"> (ele_of_str("Loading")) </H2>,
+    <SnippetItem.Loading key="loading-1" />,
+    <SnippetItem.Loading key="loading-2" />
   ]
   |> ele_of_list;
 
@@ -89,7 +92,8 @@ let make = (~query, ~filter="", _children) => {
                switch response {
                | Loading => renderLoading()
                | Failed(_error) => renderFailed()
-               | Loaded(result) => renderLoaded(~query, parse(result)##allSnippets)
+               | Loaded(result) =>
+                 renderLoaded(~query, parse(result)##allSnippets)
                }
            )
       </Query>
