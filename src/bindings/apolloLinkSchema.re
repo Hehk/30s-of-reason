@@ -4,10 +4,9 @@ type schema('a) = {
   "typeDefs": string
 };
 
-type config('a) = {. "schema": schema('a)};
+type config = {. "schema": GraphQL.Type.schema};
 
 [@bs.module "apollo-link-schema"] [@bs.new]
-external _make : config('a) => ReasonApolloTypes.apolloLink =
-  "SchemaLink";
+external _make : config => ReasonApolloTypes.apolloLink = "SchemaLink";
 
-let make =_make;
+let make = _make;

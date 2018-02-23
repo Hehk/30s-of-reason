@@ -27,17 +27,17 @@ Express.App.useOnPath(
 
 Express.App.useOnPath(
   app,
-  Express.Middleware.from((_req, res, _next) => {
-    let body =
-      ReactDOMServerRe.renderToString(
-        <App query=(module ApolloServer.Client.Query) />
-      );
-    let styles = Template.generateStyles(~html=body, ());
-    Express.Response.sendString(
-      res,
-      Template.make(~body, ~styles, ~title="30s of Reason", ())
-    );
-  }),
+  Express.Middleware.from(
+    {
+      let body =
+        ReactDOMServerRe.renderToString(
+          <App query=(module ApolloServer.Client.Query) />
+        );
+      let styles = Template.generateStyles(~html=body, ());
+      let html = Template.make(~body, ~styles, ~title="30s of Reason", ());
+      (_req, res, _next) => Express.Response.sendString(res, html);
+    }
+  ),
   ~path="/"
 );
 

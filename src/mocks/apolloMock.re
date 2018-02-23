@@ -5,15 +5,26 @@ type dataObject = {
   "key": string
 };
 
-let cache = ApolloInMemoryCache.createInMemoryCache(~dataIdFromObject=(obj: dataObject) => obj##id, ());
+let cache =
+  ApolloInMemoryCache.createInMemoryCache(
+    ~dataIdFromObject=(obj: dataObject) => obj##id,
+    ()
+  );
 
-type schema('a) = {. "resolvers": {. "Query": 'a }, "typeDefs": string } ;
+type schema('a) = {
+  .
+  "resolvers": {. "Query": 'a},
+  "typeDefs": string
+};
 
 [@bs.module "graphql-tools"]
-external addMockFunctionsToSchema : {. "schema": schema('a)} => schema('a) = "addMockFunctionsToSchema";
+external addMockFunctionsToSchema :
+  {. "schema": schema('a)} => GraphQL.Type.schema =
+  "addMockFunctionsToSchema";
 
 [@bs.module "graphql-tools"]
-external makeExecutableSchema : {. "typeDefs": string} => schema(unit) = "makeExecutableSchema";
+external makeExecutableSchema : {. "typeDefs": string} => schema(unit) =
+  "makeExecutableSchema";
 
 let schema = {
   let executableSchema = makeExecutableSchema({"typeDefs": Graphql.types});
@@ -25,6 +36,12 @@ let link = ApolloLinkSchema.make({"schema": schema});
 module Client =
   ReasonApollo.CreateClient(
     {
-      let apolloClient = ReasonApollo.createApolloClient(~cache, ~link, ~ssrMode=Js.Boolean.to_js_boolean(true), ());
+      let apolloClient =
+        ReasonApollo.createApolloClient(
+          ~cache,
+          ~link,
+          ~ssrMode=Js.Boolean.to_js_boolean(true),
+          ()
+        );
     }
   );
