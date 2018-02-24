@@ -21,20 +21,20 @@ let renderFailed = () => ele_of_str("failed");
 
 let renderLoaded = text => <Code text language="js" />;
 
-let make = (~query as q, ~id, _children) => {
+let make = (~id, _children) => {
   ...component,
   render: _self => {
     let query = JsSnippetQuery.make(~id, ());
-    module Query = (val (q: (module Apollo.Query)));
-    <Query query>
-      ...(
-           (response, parse) =>
-             switch response {
-             | Loading => renderLoading()
-             | Failed(_error) => renderFailed()
-             | Loaded(result) => renderLoaded(parse(result)##snippet##jsOutput)
-             }
-         )
-    </Query>;
+    <Query
+      query
+      render=(
+        (response, parse) =>
+          switch response {
+          | Loading => renderLoading()
+          | Failed(_error) => renderFailed()
+          | Loaded(result) => renderLoaded(parse(result)##snippet##jsOutput)
+          }
+      )
+    />;
   }
 };

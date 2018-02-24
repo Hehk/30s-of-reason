@@ -11,7 +11,14 @@ module Toggle = (
           Raw("transition", Animation.Transition.normal),
           Padding(Spacing.small),
           BorderRadius(Frame.borderRadius),
-          Select(":hover", [|BackgroundColor(Colors.red), Color(Colors.white), Raw("box-shadow", Frame.Shadow.red)|])
+          Select(
+            ":hover",
+            [|
+              BackgroundColor(Colors.red),
+              Color(Colors.white),
+              Raw("box-shadow", Frame.Shadow.red)
+            |]
+          )
         |]
       )
 );
@@ -30,7 +37,7 @@ let reducer = (action, state) =>
 
 let component = ReasonReact.reducerComponent("Snippet");
 
-let make = (~query, ~id, ~title, ~description, ~content, _children) => {
+let make = (~id, ~title, ~description, ~content, _children) => {
   ...component,
   initialState,
   reducer,
@@ -42,7 +49,7 @@ let make = (~query, ~id, ~title, ~description, ~content, _children) => {
       <H3> (ele_of_str(title)) </H3>
       <P> (ele_of_str(description)) </P>
       <Code text=content />
-      (jsOutput ? <JsSnippet query id /> : ele_of_str(""))
+      (jsOutput ? <JsSnippet id /> : ele_of_str(""))
     </Card>
 };
 

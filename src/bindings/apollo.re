@@ -74,3 +74,16 @@ module type Query = {
       action
     );
 };
+
+type apolloState =
+  | None
+  | Some((module Query));
+
+module Context =
+  Context.CreateContext(
+    {
+      type state = apolloState;
+      let name = "Apollo";
+      let defaultValue = None;
+    }
+  );

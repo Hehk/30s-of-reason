@@ -33,7 +33,7 @@ let rec filterOutVariant = (acc, l) =>
     }
   };
 
-let renderSections = (query, snippets) =>
+let renderSections = snippets =>
   snippets
   |> List.map(
        fun
@@ -52,7 +52,6 @@ let renderSections = (query, snippets) =>
                        title=x##title
                        description=x##description
                        content=x##content
-                       query
                      />
                    )
            ];
@@ -72,31 +71,30 @@ let renderLoading = () =>
 
 let renderFailed = () => ele_of_str("error");
 
-let renderLoaded = (~query, snippets) =>
+let renderLoaded = snippets =>
   snippets
   |> Array.to_list
   |> filterOutVariant([])
   |> createSections
-  |> renderSections(query)
+  |> renderSections
   |> ele_of_list;
 
-let make = (~query, ~filter="", _children) => {
+let make = (~filter="", _children) => {
   ...component,
   render: _self => {
-    module Query = (val (query: (module Apollo.Query)));
     let snippetQuery = SnippetQuery.make(~filter, ());
     <PageFrame>
-      <Query query=snippetQuery>
-        ...(
-             (response, parse) =>
-               switch response {
-               | Loading => renderLoading()
-               | Failed(_error) => renderFailed()
-               | Loaded(result) =>
-                 renderLoaded(~query, parse(result)##allSnippets)
-               }
-           )
-      </Query>
+      <Query
+        query=snippetQuery
+        render=(
+          (response, parse) =>
+            switch response {
+            | Loading => renderLoading()
+            | Failed(_error) => renderFailed()
+            | Loaded(result) => renderLoaded(parse(result)##allSnippets)
+            }
+        )
+      />
     </PageFrame>;
   }
 };

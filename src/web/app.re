@@ -23,11 +23,13 @@ let make = (~query, _children) => {
   initialState,
   reducer,
   render: ({state, send}) =>
-    <Background>
-      <Header />
-      <PageFrame>
-        <Search onChange=(changeSearch(send)) />
-        <SnippetList query filter=state.search />
-      </PageFrame>
-    </Background>
+    <Apollo.Context.Provider value=(Some(query))>
+      <Background>
+        <Header />
+        <PageFrame>
+          <Search onChange=(changeSearch(send)) />
+          <SnippetList filter=state.search />
+        </PageFrame>
+      </Background>
+    </Apollo.Context.Provider>
 };
