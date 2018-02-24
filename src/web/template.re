@@ -1,5 +1,4 @@
-let globalStyles = "body { margin: 0; padding: 0;} @keyframes loadingAnimation { 0%, 100% { opacity: 0.25;} 50% {opacity:
-0.5;}}";
+let globalStyles = "body { margin: 0; padding: 0;} @keyframes loadingAnimation { 0%, 100% { opacity: 0.25;} 50% {opacity:\n0.5;}}";
 
 let make = (~body, ~styles, ~title, ()) => {j|
   <!DOCTYPE html>
@@ -15,6 +14,7 @@ let make = (~body, ~styles, ~title, ()) => {j|
       </body>
 
       <script src="dist/bundle.js"></script>
+      <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     </html>
 |j};
 

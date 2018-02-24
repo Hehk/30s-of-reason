@@ -1,8 +1,19 @@
 open Theme;
 
-module Wrapper = (
+module Wrapper = (val NiceComponents.div([|Position(Relative)|]));
+
+module SearchIcon = (
+  val NiceComponents.div([|
+        Position(Absolute),
+        Top(Percent(50.)),
+        Raw("transform", "translateY(-50%)"),
+        PaddingLeft(Spacing.normal)
+      |])
+);
+
+module Input = (
   val NiceComponents.input(
-        ~debugName="SearchWrapper",
+        ~debugName="SearchInput",
         [|
           Raw("outline", "none"),
           Raw("border", "none"),
@@ -12,6 +23,7 @@ module Wrapper = (
           Width(Percent(100.)),
           Raw("box-shadow", Frame.Shadow.normal),
           Padding(Spacing.normal),
+          PaddingLeft(Rem(3.)),
           MarginTop(Spacing.normal),
           Raw("font-size", Font.Size.normal),
           Raw("transition", Animation.Transition.normal),
@@ -37,14 +49,17 @@ let make = (~initialValue="", ~onChange=_newValue => (), _children) => {
   initialState: () => {value: initialValue},
   reducer,
   render: ({send, state}) =>
-    <Wrapper
-      props={
-        "value": state.value,
-        "onChange": e => {
-          let value = e##target##value;
-          send(ChangeValue(value));
-          onChange(value);
+    <Wrapper>
+      <SearchIcon> <div className="fas fa-search" /> </SearchIcon>
+      <Input
+        props={
+          "value": state.value,
+          "onChange": e => {
+            let value = e##target##value;
+            send(ChangeValue(value));
+            onChange(value);
+          }
         }
-      }
-    />
+      />
+    </Wrapper>
 };

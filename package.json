@@ -2,10 +2,10 @@
   "name": "server",
   "version": "0.1.0",
   "scripts": {
-    "build": "bsb -make-world",
+    "build": "bsb -make-world && webpack --mode=production",
     "start": "bsb -make-world -w",
     "start-server": "nodemon lib/js/src/index.bs.js",
-    "start-web": "webpack --watch --env.browser",
+    "start-web": "webpack --watch --mode=development",
     "start-reason": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "jest --watch",
@@ -31,7 +31,8 @@
     "nodemon": "^1.14.11",
     "prettier": "^1.10.2",
     "uglifyjs-webpack-plugin": "^1.1.8",
-    "webpack": "^3.10.0"
+    "webpack": "^4.0.0-beta.3",
+    "webpack-cli": "^2.0.8"
   },
   "dependencies": {
     "algoliasearch": "^3.24.9",

@@ -10,11 +10,8 @@ module.exports = {
     publicPath: "/",
     filename: "bundle.js"
   },
-  plugins: [
-    // new UglifyWebpackPlugin()
-  ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/
