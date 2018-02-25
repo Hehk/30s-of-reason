@@ -1,0 +1,13 @@
+.DS_Store
+.merlin
+.bsb.lock
+npm-debug.log
+/node_modules/
+
+# Build assets
+/lib/*
+/build/*
+/dist/*
+
+# My pesky vim
+*.swp
