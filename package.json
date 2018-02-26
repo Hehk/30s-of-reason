@@ -9,7 +9,7 @@
     "start-reason": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "jest --watch",
-    "publish":
+    "deploy":
       "now -e ALGOLIA_API_KEY=@algolia-api-key -e ALGOLIA_APPLICATION_ID=@algolia-application-id --docker"
   },
   "husky": {
