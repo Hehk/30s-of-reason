@@ -9,9 +9,13 @@
     "start-reason": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "test": "jest --watch",
-    "precommit": "lint-staged",
     "publish":
       "now -e ALGOLIA_API_KEY=@algolia-api-key -e ALGOLIA_APPLICATION_ID=@algolia-application-id --docker"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{re,rei}": ["refmt --in-place", "git add"],
@@ -27,13 +31,12 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "graphql_ppx": "^0.2.1",
-    "husky": "^0.14.3",
+    "husky": "^0.15.0-rc.8",
     "jest": "^22.3.0",
     "lint-staged": "^7.0.0",
     "nodemon": "^1.14.11",
     "prettier": "^1.10.2",
-    "uglifyjs-webpack-plugin": "^1.1.8",
-    "webpack": "^4.0.0-beta.3",
+    "webpack": "^4.0.0",
     "webpack-cli": "^2.0.8"
   },
   "dependencies": {
@@ -52,7 +55,6 @@
     "bs-graphql-tools": "^0.3.1",
     "bs-nice": "http://github.com/hehk/bs-nice",
     "bs-nice-components": "http://github.com/hehk/bs-nice-components",
-    "detect-node": "^2.0.3",
     "express": "^4.16.2",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
@@ -60,7 +62,7 @@
     "lodash.debounce": "^4.0.8",
     "reason-apollo": "^0.6.17",
     "reason-react": "^0.3.1",
-    "reason-react-context": "http://github.com/hehk/reason-react-context"
+    "reason-react-context": "^0.1.0"
   },
   "jest": {
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.bs.js?$"
