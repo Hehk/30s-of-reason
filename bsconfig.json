@@ -18,6 +18,7 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
+    "reason-react-context",
     "bs-algolia",
     "bs-express",
     "bs-graphql",
@@ -28,16 +29,11 @@
     "bs-nice",
     "bs-nice-components"
   ],
-  "bs-dev-dependencies": [
-    "@glennsl/bs-jest",
-    "bs-enzyme"
-  ],
+  "bs-dev-dependencies": ["@glennsl/bs-jest", "bs-enzyme"],
   "reason": {
     "react-jsx": 2
   },
-  "ppx-flags": [
-    "graphql_ppx/ppx"
-  ],
+  "ppx-flags": ["graphql_ppx/ppx"],
   "namespace": true,
   "refmt": 3
 }

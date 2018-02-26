@@ -59,7 +59,8 @@
     "graphql-tools": "^2.19.0",
     "lodash.debounce": "^4.0.8",
     "reason-apollo": "^0.6.17",
-    "reason-react": "^0.3.1"
+    "reason-react": "^0.3.1",
+    "reason-react-context": "http://github.com/hehk/reason-react-context"
   },
   "jest": {
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.bs.js?$"

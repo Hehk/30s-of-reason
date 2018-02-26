@@ -80,7 +80,7 @@ type apolloState =
   | Some((module Query));
 
 module Context =
-  Context.CreateContext(
+  ReasonReactContext.CreateContext(
     {
       type state = apolloState;
       let name = "Apollo";
