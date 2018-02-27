@@ -1,6 +1,7 @@
 /* @title (|>) Pipe Operator */
 /* @section Operator */
-/* @description Reverse-application operator. let (|>): ('a, 'a => 'b) => 'b */
+/* @description Reverse-application operator. */
+/* @type let (|>): ('a, 'a => 'b) => 'b; */
 /* @content */
 let add = (a, b) => a + b;
 

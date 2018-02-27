@@ -37,7 +37,7 @@ let reducer = (action, state) =>
 
 let component = ReasonReact.reducerComponent("Snippet");
 
-let make = (~id, ~title, ~description, ~content, _children) => {
+let make = (~id, ~title, ~description, ~content, ~typeSpec, _children) => {
   ...component,
   initialState,
   reducer,
@@ -48,6 +48,7 @@ let make = (~id, ~title, ~description, ~content, _children) => {
       </Toggle>
       <H3> (ele_of_str(title)) </H3>
       <P> (ele_of_str(description)) </P>
+      <Code title="Type spec" text=typeSpec />
       <Code text=content />
       (jsOutput ? <JsSnippet id /> : ele_of_str(""))
     </Card>

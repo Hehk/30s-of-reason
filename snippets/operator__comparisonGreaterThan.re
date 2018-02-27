@@ -1,6 +1,7 @@
 /* @title (>) Greater Than Operator */
 /* @section Operator */
-/* @description Returns if a variable is greater than another. let (>): ('a, 'a) => bool */
+/* @description Returns if a variable is greater than another. */
+/* @type let (>): ('a, 'a) => bool; */
 /* @content */
 let a = 5 > 4; /* true */
 

@@ -1,6 +1,7 @@
 /* @title (:=) Reference Assignment Operator */
 /* @section Operator */
-/* @description Changes the value stored in a reference. (ref('a), 'a) => unit */
+/* @description Changes the value stored in a reference. */
+/* @type let (:=): (ref('a), 'a) => unit; */
 /* @content */
 let a = ref(5);
 

@@ -1,6 +1,7 @@
 /* @title (<) Less Than Operator */
 /* @section Operator */
-/* @description Returns if a variable is less than another. let (<): ('a, 'a) => bool */
+/* @description Returns if a variable is less than another. */
+/* @type let (<): ('a, 'a) => bool; */
 /* @content */
 let a = 5 < 4; /* false */
 

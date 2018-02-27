@@ -1,6 +1,7 @@
 /* @title (*.) Float Multiplication */
 /* @section Operator */
-/* @description Handles mutlication of floating point numbers. (float, float) => float */
+/* @description Handles mutlication of floating point numbers.*/
+/* @type let (*.): (float, float) => float */
 /* @content */
 let a = 5. *. 5.;
 

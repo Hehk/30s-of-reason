@@ -1,6 +1,7 @@
 /* @title (!==) Not Equals Operator */
 /* @section Operator */
-/* @description Negation of the === operator. ('a, 'a) => bool */
+/* @description Negation of the === operator. */
+/* @type let (!==): ('a, 'a) => bool; */
 /* @content */
 let a = 5 !== 4; /* true */
 

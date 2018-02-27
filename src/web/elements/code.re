@@ -8,6 +8,7 @@ module Wrapper = (
         [|
           Display(Block),
           Padding(Spacing.normal),
+          PaddingTop(Spacing.none),
           BorderRadius(Frame.borderRadius),
           MarginBottom(Spacing.normal),
           BackgroundColor(Colors.black),
@@ -19,12 +20,19 @@ module Wrapper = (
       )
 );
 
-module Line = (val NiceComponents.div(~debugName="Line", [|Raw("white-space", "pre")|]));
+module Line = (
+  val NiceComponents.div(~debugName="Line", [|Raw("white-space", "pre")|])
+);
 
 module LineNumber = (
   val NiceComponents.span(
         ~debugName="LineNumber",
-        [|MinWidth(Rem(2.)), Display(InlineBlock), Raw("user-select", "none"), Color(Colors.darkGray)|]
+        [|
+          MinWidth(Rem(2.)),
+          Display(InlineBlock),
+          Raw("user-select", "none"),
+          Color(Colors.darkGray)
+        |]
       )
 );
 
@@ -35,13 +43,28 @@ module Language = (
       )
 );
 
+module Header = (
+  val NiceComponents.div(
+        ~debugName="CodeHeader",
+        [|
+          MarginBottom(Spacing.small),
+          PaddingBottom(Spacing.small),
+          PaddingTop(Spacing.small),
+          Raw("border-bottom", "solid 1px gray")
+        |]
+      )
+);
+
 let component = ReasonReact.statelessComponent("Code");
 
-let make = (~text, ~language="re", _children) => {
+let make = (~text, ~language="re", ~title="Sample ReasonML", _children) => {
   ...component,
   render: _self =>
     <Wrapper>
-      <Language> (ele_of_str(language)) </Language>
+      <Header>
+        (ele_of_str(title))
+        <Language> (ele_of_str(language)) </Language>
+      </Header>
       (
         ele_of_arr(
           text

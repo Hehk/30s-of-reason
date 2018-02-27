@@ -7,7 +7,8 @@ type t = {
   "example": string,
   "jsOutput": string,
   "objectID": string,
-  "section": string
+  "section": string,
+  "typeSpec": string
 };
 
 let graphQLType = {|
@@ -19,6 +20,7 @@ let graphQLType = {|
     example:     String!
     jsOutput:    String!
     section:     String!
+    typeSpec:    String!
   }
 |};
 
@@ -33,9 +35,15 @@ module Scraper = {
   let loadSnippetJsOutput = name =>
     Node.Fs.readFileAsUtf8Sync(workingJsDir ++ name ++ ".bs.js");
   let createSnippet = (~id, ~rawRe, ~jsOutput, ~name, ()) => {
-    let pattern = [%bs.re
-      "/(\\/\\* @title )([\\s\\S]*)(\\*\\/[\\s\\S]*)(\\/\\* @section )([\\s\\S]*)(\\*\\/[\\s\\S]*)(\\/\\* @description )([\\s\\S]*)(\\*\\/)([\\s\\S]*)(\\/\\* @content \\*\\/)([\\s\\S]*)(\\/\\* @example \\*\\/)([\\s\\S]*)/"
-    ];
+    let pattern =
+      Js.Re.fromString(
+        "(\\/\\* @title )([\\s\\S]*)(\\*\\/[\\s\\S]*)"
+        ++ "(\\/\\* @section )([\\s\\S]*)(\\*\\/[\\s\\S]*)"
+        ++ "(\\/\\* @description )([\\s\\S]*)(\\*\\/[\\s\\S]*)"
+        ++ "(\\/\\* @type )([\\s\\S]*)(\\*\\/[\\s\\S]*)"
+        ++ "(\\/\\* @content \\*\\/)([\\s\\S]*)"
+        ++ "(\\/\\* @example \\*\\/)([\\s\\S]*)"
+      );
     /* God i hate regex in Reason */
     let segments =
       switch (Js.Re.exec(rawRe, pattern)) {
@@ -63,7 +71,9 @@ module Scraper = {
         _descHeader,
         description,
         _descEnd,
-        _setup,
+        _typeHeader,
+        typeSpec,
+        _typeEnd,
         _contentHeader,
         content,
         _exampleHeader,
@@ -72,6 +82,7 @@ module Scraper = {
         "id": id,
         "title": String.trim(title),
         "description": String.trim(description),
+        "typeSpec": String.trim(typeSpec),
         "section": String.trim(section),
         "content": String.trim(content),
         "example": String.trim(example),
@@ -86,6 +97,7 @@ module Scraper = {
         "example": "",
         "jsOutput": "",
         "section": "",
+        "typeSpec": "",
         "objectID": name
       }
     };

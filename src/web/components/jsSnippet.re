@@ -12,14 +12,16 @@ query getJsSnippet($id: ID!) {
 
 let component = ReasonReact.statelessComponent("JsSnippet");
 
+let title = "JavaScript Output";
+
 let renderLoading = () =>
   <LoadingAnimation>
-    <Code text="Loading the impure world" language="js" />
+    <Code title text="Loading the impure world" language="js" />
   </LoadingAnimation>;
 
 let renderFailed = () => ele_of_str("failed");
 
-let renderLoaded = text => <Code text language="js" />;
+let renderLoaded = text => <Code title text language="js" />;
 
 let make = (~id, _children) => {
   ...component,

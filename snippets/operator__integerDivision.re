@@ -1,6 +1,7 @@
 /* @title (/) Integer Division Operator */
 /* @section Operator */
-/* @description Handles division two integers together. let (/): (int, int) => int */
+/* @description Handles division two integers together. */
+/* @type let (/): (int, int) => int */
 /* @content */
 let a = 5 / 2; /* 2 */
 

@@ -1,6 +1,7 @@
 /* @title (+) Integer Addition Operator */
 /* @section Operator */
-/* @description Handles adding two integers together. let (+): (int, int) => int */
+/* @description Handles adding two integers together. */
+/* @type let (+): (int, int) => int */
 /* @content */
 let a = 5 + 5; /* 10 */
 

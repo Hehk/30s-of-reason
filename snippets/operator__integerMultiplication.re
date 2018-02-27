@@ -1,6 +1,7 @@
 /* @title (*) Multiplication Operator */
 /* @section Operator */
-/* @description An operator for handling integer multiplication. (int, int) => int */
+/* @description An operator for handling integer multiplication. */
+/* @type let (*): (int, int) => int */
 /* @content */
 let a = 5 * 5;
 

@@ -1,6 +1,7 @@
 /* @title (**) Exponentiation */
 /* @section Operator */
-/* @description An operator to handle float exponentiation. (float, float) => float */
+/* @description An operator to handle float exponentiation.*/
+/* @type  let (**): (float, float) => float */
 /* @content */
 let a = 5. ** 5.;
 

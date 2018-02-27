@@ -1,6 +1,7 @@
 /* @title (@@) Application Operator */
 /* @section Operator */
-/* @description Takes a function and applies the next parameter to it. let (@@): ('a => 'b, 'a) => 'b;*/
+/* @description Takes a function and applies the next parameter to it. */
+/* @type let (@@): ('a => 'b, 'a) => 'b; */
 /* @content */
 let add = (a, b) => a + b;
 

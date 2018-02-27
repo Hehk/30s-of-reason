@@ -1,6 +1,7 @@
 /* @title (===) Equals Operator */
 /* @section Operator */
-/* @description Compares if two values are equal. let (===): ('a, 'a) => bool */
+/* @description Compares if two values are equal. */
+/* @type let (===): ('a, 'a) => bool */
 /* @content */
 let a = 5 === 4; /* false */
 

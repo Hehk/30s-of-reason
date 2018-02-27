@@ -1,6 +1,7 @@
 /* @title (/.) Float Division Operator */
 /* @section Operator */
-/* @description Handles dividing two floats together. let (/.): (float, float) => float */
+/* @description Handles dividing two floats together.*/
+/* @type  let (/.): (float, float) => float */
 /* @content */
 let a = 5. /. 2.; /* 2.5 */
 

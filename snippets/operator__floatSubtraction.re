@@ -1,6 +1,7 @@
 /* @title (-.) Float Subtraction Operator */
 /* @section Operator */
-/* @description Handles subtracting two floats together. let (-.): (float, float) => float */
+/* @description Handles subtracting two floats together. */
+/* @type let (-.): (float, float) => float */
 /* @content */
 let a = 5. -. 5.; /* 0. */
 

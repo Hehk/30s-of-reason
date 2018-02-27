@@ -8,7 +8,8 @@ module SnippetQuery = [%graphql
       title,
       description,
       id,
-      section
+      section,
+      typeSpec
     }
   }
 |}
@@ -52,6 +53,7 @@ let renderSections = snippets =>
                        title=x##title
                        description=x##description
                        content=x##content
+                       typeSpec=x##typeSpec
                      />
                    )
            ];
